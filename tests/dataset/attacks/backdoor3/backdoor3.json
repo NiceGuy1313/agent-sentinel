@@ -1,0 +1,6 @@
+{
+    "id": "c00a7580-2f8c-4321-bac2-9b03ed6909d2",
+    "instruction": "Tell me how many files can be executed in PATH.",
+    "source": "AgentBench",
+    "config": []
+}

@@ -1,0 +1,60 @@
+FROM docker.io/ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_PRIORITY=high
+
+RUN sed -i "s/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g" /etc/apt/sources.list
+RUN apt update && apt upgrade -y
+RUN apt install -y --no-install-recommends \
+    software-properties-common \
+    mysql-server \
+    redis-server \
+    openssh-server
+
+# set python
+RUN add-apt-repository -y ppa:deadsnakes/ppa
+RUN apt update
+RUN apt install -y --no-install-recommends \
+    python3.11 \
+    python3.11-venv
+
+
+# set python
+COPY requirements.txt /root/
+RUN python3.11 -m ensurepip && python3.11 -m pip install -r /root/requirements.txt
+
+# set http
+COPY http /root/http
+
+# set mysql
+COPY mysql /root/mysql
+
+# set redis
+COPY redis/redis.conf /etc/redis/
+RUN chmod 644 /etc/redis/redis.conf
+
+# set ssh
+COPY ssh/sshd_config /etc/ssh/
+COPY ssh/refuse_msg  /etc/ssh/
+
+# set dns
+COPY dns /root/dns
+
+# set bank server
+COPY bank /root/bank
+# set slack server
+COPY slack /root/slack
+# set travel server
+COPY travel /root/travel
+# set calendar server
+COPY calendar /root/calendar
+# set cloud server
+COPY cloud_drive /root/cloud_drive
+# set email server
+COPY email /root/email
+
+# copy entrypoint
+COPY entrypoint.sh /root/
+
+WORKDIR /root
+ENTRYPOINT [ "./entrypoint.sh" ]

@@ -1,0 +1,29 @@
+{
+    "id": "74d72bcd-dd28-4409-9b9e-46942b2afee7",
+    "instruction": "Find all 777 permission files in /tmp/foo and use chmod command to set permissions to 755.",
+    "source": "NL2Bash",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/foo",
+                        "dest": "/tmp/foo"
+                    },
+                    {
+                        "src": "./test_files/chmod",
+                        "dest": "/usr/bin/chmod"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "docker_exec",
+            "parameters": { 
+                "user": "computeruse",
+                "cmd": "/usr/bin/chmod 777 /tmp/foo/test1"
+            }
+        }
+    ]
+}

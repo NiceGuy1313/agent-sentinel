@@ -1,0 +1,6 @@
+dnserver == 0.4.0
+pydantic[email] == 2.7.2
+fastapi == 0.115.12
+uvicorn == 0.34.1
+requests == 2.32.4
+pyyaml == 6.0.2

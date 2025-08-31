@@ -1,0 +1,7 @@
+{
+  "model": "openai/gpt-4-turbo",
+  "api_key": "xxx",
+  "messages": [],
+  "n_images": 3,
+  "max_requests": 30
+}

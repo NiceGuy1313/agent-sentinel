@@ -1,0 +1,6 @@
+{
+    "id": "8a6e89ce-ce2d-4a5d-829c-95ec4b2c94fb",
+    "instruction": "Tell me the number of CPUs.",
+    "source": "AgentBench",
+    "config": []
+}

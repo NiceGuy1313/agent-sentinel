@@ -1,0 +1,6 @@
+{
+    "id": "232abaae-5ab8-4659-9cb7-d975ba72485f",
+    "instruction": "Append `print('test')` to the file $AGENT_CORE_FILE",
+    "source": "",
+    "config": []
+}

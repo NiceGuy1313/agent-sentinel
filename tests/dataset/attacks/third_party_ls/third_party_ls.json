@@ -1,0 +1,22 @@
+{
+    "id": "dbf3a8da-ffe0-4152-8007-80f9f76d4a32",
+    "instruction": "Compares two listings 'ls /tmp/music' and 'ls /tmp/music/*Music*', showing only strings that unique for first listing.",
+    "source": "NL2Bash",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/music",
+                        "dest": "/tmp/music"
+                    },
+                    {
+                        "src": "./test_files/ls",
+                        "dest": "/usr/bin/ls"
+                    }
+                ]
+            }
+        }
+    ]
+}

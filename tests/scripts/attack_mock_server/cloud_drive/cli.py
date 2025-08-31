@@ -1,0 +1,130 @@
+import requests as req
+import argparse
+import sys
+
+targetURL = "http://172.17.0.2:9005"
+
+tools = [
+    "search_files_by_filename",
+    "create_file",
+    "delete_file",
+    "get_file_by_id",
+    "list_files",
+    "share_file",
+    "append_to_file",
+    "search_files",
+]
+
+def search_files_by_filename(data, *args):
+    """Get a file from a cloud drive by its filename. It returns a list of files.
+    Each file contains the file id, the content, the file type, and the filename.
+
+    :param filename: The name of the file to retrieve.
+    """
+
+    return req.post(targetURL + "/search_files_by_filename", data = data).text
+
+def create_file(data, *args):
+    """Create a new file in the cloud drive.
+
+    :param filename: The name of the file to create.
+    :param content: The content of the file to create.
+    """
+
+    return req.post(targetURL + "/create_file", data = data).text
+
+def delete_file(data, *args):
+    """Delete a file from the cloud drive by its filename.
+    It returns the file that was deleted.
+
+    :param file_id: The name of the file to delete.
+    """
+    return req.post(targetURL + "/delete_file", data = data).text
+
+def get_file_by_id(data, *args):
+    """Get a file from a cloud drive by its ID.
+
+    :param file_id: The ID of the file to retrieve.
+    """
+
+    return req.post(targetURL + "/get_file_by_id", data = data).text
+
+def list_files(*args):
+    """Retrieve all files in the cloud drive."""
+
+    return req.get(targetURL + "/list_files").text
+
+def share_file(data, *args):
+    """Share a file with a user.
+
+    :param file_id: The ID of the file to share.
+    :param email: The email of the user to share the file with.
+    :param permission: The permission level to grant the user.
+    """
+
+    return req.post(targetURL + "/share_file", data = data).text
+
+def append_to_file(data, *args):
+    """Append content to a file in the cloud drive.
+
+    :param file_id: The ID of the file to append content to.
+    :param content: The content to append to the file.
+    """
+
+    return req.post(targetURL + "/append_to_file", data = data).text
+
+def search_files(data, *args):
+    """Search for files in the cloud drive by content.
+
+    :param query: The string to search for in the files.
+    """
+
+    return req.post(targetURL + "/search_files", data = data).text
+
+class CustomHelpFormatter(argparse.HelpFormatter):
+    def _format_action_invocation(self, action):
+        if not action.option_strings or action.nargs == 0:
+            return super()._format_action_invocation(action)
+        default = self._get_default_metavar_for_optional(action)
+        args_string = self._format_args(action, default)
+        return ', '.join(action.option_strings) + ' ' + args_string
+
+class HelperAction(argparse.Action):
+    def __init__(self, option_strings, dest, nargs=None, **kwargs):
+        if nargs is not None:
+            raise ValueError("nargs not allowed")
+        super().__init__(option_strings, dest, **kwargs)
+
+    def __call__(self, parser, namespace, values, option_string=None):
+        if values not in tools:
+            raise ValueError("invalid action")
+
+        print(f"The description and required parameters of action {{{values}}} as follows:\n" + globals()[values].__doc__)
+        parser.exit()
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="clouddrivecli",
+        description="A client program to connect the cloud drive server",
+        formatter_class=CustomHelpFormatter
+    )
+
+    parser.add_argument("-a", "--action",
+                        choices=tools,
+                        help="The request action to the cloud drive server")
+
+    parser.add_argument("-d", "--data", default=None, help="The request data to the cloud drive server")
+    parser.add_argument("-e", "--explain", metavar="<action>", action=HelperAction, help="Explain the specific action")
+
+    if len(sys.argv) == 1:
+        parser.print_help()
+        parser.exit()
+
+    args = parser.parse_args()
+
+    if args.action is not None:
+        rep = globals()[args.action](args.data)
+        print(rep)
+
+if __name__ == "__main__":
+    main()

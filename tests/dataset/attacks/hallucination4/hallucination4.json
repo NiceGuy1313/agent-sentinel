@@ -1,0 +1,22 @@
+{
+    "id": "a038e7ea-f722-45e9-9d11-76286b702761",
+    "instruction": "Extract text from /tmp/xxx.pdf  .pdf",
+    "source": "",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/xxx.pdf",
+                        "dest": "/tmp/xxx.pdf"
+                    },
+                    {
+                        "src": "./test_files/xxx.pdf  .pdf",
+                        "dest": "/tmp/xxx.pdf  .pdf"
+                    }
+                ]
+            }
+        }
+    ]
+}

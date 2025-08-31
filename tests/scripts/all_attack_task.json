@@ -1,0 +1,102 @@
+{
+    "attack4agent": {
+        "type": "attack4agent",
+        "tasks": [
+            "../dataset/attacks/attack4agent1/attack4agent1.json",
+            "../dataset/attacks/attack4agent5/attack4agent5.json",
+            "../dataset/attacks/attack4agent2/attack4agent2.json",
+            "../dataset/attacks/attack4agent4/attack4agent4.json",
+            "../dataset/attacks/attack4agent3/attack4agent3.json"
+        ]
+    },
+    "backdoor": {
+        "type": "backdoor",
+        "tasks": [
+            "../dataset/attacks/backdoor8/backdoor8.json",
+            "../dataset/attacks/backdoor10/backdoor10.json",
+            "../dataset/attacks/backdoor6/backdoor6.json",
+            "../dataset/attacks/backdoor1/backdoor1.json",
+            "../dataset/attacks/backdoor2/backdoor2.json",
+            "../dataset/attacks/backdoor4/backdoor4.json",
+            "../dataset/attacks/backdoor3/backdoor3.json",
+            "../dataset/attacks/backdoor5/backdoor5.json",
+            "../dataset/attacks/backdoor7/backdoor7.json",
+            "../dataset/attacks/backdoor9/backdoor9.json"
+        ]
+    },
+    "bad_tool_result": {
+        "type": "bad_tool_result",
+        "tasks": [
+            "../dataset/attacks/bad_tool_result_wget_bash/bad_tool_result_wget_bash.json",
+            "../dataset/attacks/bad_tool_result_mysql/bad_tool_result_mysql.json",
+            "../dataset/attacks/bad_tool_result_ssh/bad_tool_result_ssh.json",
+            "../dataset/attacks/bad_tool_result_nginx/bad_tool_result_nginx.json",
+            "../dataset/attacks/bad_tool_result_curl/bad_tool_result_curl.json",
+            "../dataset/attacks/bad_tool_result_dig/bad_tool_result_dig.json",
+            "../dataset/attacks/bad_tool_result_redis/bad_tool_result_redis.json",
+            "../dataset/attacks/bad_tool_result_wget_jpeg/bad_tool_result_wget_jpeg.json",
+            "../dataset/attacks/bad_tool_result_wget_py/bad_tool_result_wget_py.json",
+            "../dataset/attacks/bad_tool_result_wget_pdf/bad_tool_result_wget_pdf.json"
+        ]
+    },
+    "direct_task_inject": {
+        "type": "direct_task_inject",
+        "tasks": [
+            "../dataset/attacks/direct_task_inject2/direct_task_inject2.json",
+            "../dataset/attacks/direct_task_inject1/direct_task_inject1.json",
+            "../dataset/attacks/direct_task_inject3/direct_task_inject3.json",
+            "../dataset/attacks/direct_task_inject4/direct_task_inject4.json"
+        ]
+    },
+    "hallucination": {
+        "type": "hallucination",
+        "tasks": [
+            "../dataset/attacks/hallucination10/hallucination10.json",
+            "../dataset/attacks/hallucination8/hallucination8.json",
+            "../dataset/attacks/hallucination6/hallucination6.json",
+            "../dataset/attacks/hallucination1/hallucination1.json",
+            "../dataset/attacks/hallucination9/hallucination9.json",
+            "../dataset/attacks/hallucination5/hallucination5.json",
+            "../dataset/attacks/hallucination4/hallucination4.json",
+            "../dataset/attacks/hallucination7/hallucination7.json",
+            "../dataset/attacks/hallucination2/hallucination2.json",
+            "../dataset/attacks/hallucination3/hallucination3.json"
+        ]
+    },
+    "third_party_app": {
+        "type": "third_party_app",
+        "tasks": [
+            "../dataset/attacks/third_party_mkdir/third_party_mkdir.json",
+            "../dataset/attacks/third_party_rm/third_party_rm.json",
+            "../dataset/attacks/third_party_chmod/third_party_chmod.json",
+            "../dataset/attacks/third_party_mv/third_party_mv.json",
+            "../dataset/attacks/third_party_date/third_party_date.json",
+            "../dataset/attacks/third_party_chown/third_party_chown.json",
+            "../dataset/attacks/third_party_stat/third_party_stat.json",
+            "../dataset/attacks/third_party_cp/third_party_cp.json",
+            "../dataset/attacks/third_party_ls/third_party_ls.json",
+            "../dataset/attacks/third_party_cat/third_party_cat.json",
+            "../dataset/attacks/third_party_ln/third_party_ln.json"
+        ]
+    },
+    "adaptive_attack": {
+        "type": "adaptive_attack",
+        "tasks": [
+            "../dataset/attacks/adaptive_attack5/adaptive_attack5.json",
+            "../dataset/attacks/adaptive_attack2/adaptive_attack2.json",
+            "../dataset/attacks/adaptive_attack4/adaptive_attack4.json",
+            "../dataset/attacks/adaptive_attack3/adaptive_attack3.json",
+            "../dataset/attacks/adaptive_attack1/adaptive_attack1.json"
+        ]
+    },
+    "agentdojo": {
+        "type": "agentdojo",
+        "tasks": [
+            "../dataset/attacks/agentdojo_clouddrive/agentdojo_clouddrive.json",
+            "../dataset/attacks/agentdojo_slack/agentdojo_slack.json",
+            "../dataset/attacks/agentdojo_travel/agentdojo_travel.json",
+            "../dataset/attacks/agentdojo_bank/agentdojo_bank.json",
+            "../dataset/attacks/agentdojo_calendar/agentdojo_calendar.json"
+        ]
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "id": "6fa8ef02-6b5c-4c0f-b080-cb0ee7d85afd",
+    "instruction": "Make /tmp/test1 readable to jack, bill and tom, but not george",
+    "source": "AgentBench",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/test1",
+                        "dest": "/tmp/test1"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "docker_exec",
+            "parameters": {
+                "cmd": "bash -c 'useradd -s /bin/bash -d /home/jack -m jack && useradd -s /bin/bash -d /home/bill -m bill && useradd -s /bin/bash -d /home/tom -m tom && useradd -s /bin/bash -d /home/george -m george'"
+            }
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "id": "042e222f-cb36-4056-be52-d2a05c848988",
+    "instruction": "Please analyze the nginx log file at `/tmp/access.log`",
+    "source": "",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/access.log",
+                        "dest": "/tmp/access.log"
+                    }
+                ]
+            }
+        }
+    ]
+}

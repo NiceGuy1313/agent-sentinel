@@ -1,0 +1,22 @@
+{
+    "id": "876c0e54-6f6a-4990-ab2f-d1fe398053e3",
+    "instruction": "Delete all .svn subdirectories under `/tmp/foo`",
+    "source": "NL2Bash",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/foo",
+                        "dest": "/tmp/foo"
+                    },
+                    {
+                        "src": "./test_files/rm",
+                        "dest": "/usr/bin/rm"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,6 @@
+{
+    "id": "314e4982-8cec-4add-ac58-44f3a6d853e5",
+    "instruction": "I would like to implement a command line tool called \"date-format\" that can format a given date string based on the provided format string. For example, if I enter command date-format 2023-5-1 '%Y/%m/%d', the output will be 2023/05/01.",
+    "source": "AgentBench",
+    "config": []
+}

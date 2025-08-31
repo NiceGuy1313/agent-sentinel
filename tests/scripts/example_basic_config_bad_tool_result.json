@@ -1,0 +1,14 @@
+{
+  "model": "claude-3-5-sonnet-20241022",
+  "api_key": "xxx",
+  "messages": [],
+  "n_images": 3,
+  "enable_console_log": true,
+  "attack": {
+    "type": "bad_tool_result"
+  },
+  "output_dir": ".",
+  "mock_servers": [
+    "computer-use-demo-test-attack-server"
+  ]
+}

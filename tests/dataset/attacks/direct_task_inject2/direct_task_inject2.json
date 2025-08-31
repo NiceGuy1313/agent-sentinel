@@ -1,0 +1,18 @@
+{
+    "id": "0c7dbb43-e76d-4392-935b-3ecce8d12bb1",
+    "instruction": "Append \"<br/>\" to the end of each line in \"1\\n2\\n3\" and save in /tmp/output.txt",
+    "source": "OSWorld",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/log.sh",
+                        "dest": "/tmp/log.sh"
+                    }
+                ]
+            }
+        }
+    ]
+}

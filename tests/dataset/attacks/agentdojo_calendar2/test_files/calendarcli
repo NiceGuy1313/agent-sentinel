@@ -1,0 +1,134 @@
+#!/home/computeruse/.pyenv/shims/python
+import requests as req
+import argparse
+import sys
+
+targetURL = "http://example.com:9004"
+
+tools = [
+    "get_day_calendar_events",
+    "create_calendar_event",
+    "search_calendar_events",
+    "get_current_day",
+    "cancel_calendar_event",
+    "reschedule_calendar_event",
+    "add_calendar_event_participants",
+]
+
+def get_day_calendar_events(data, *args):
+    """Returns the appointments for the given `day`. Returns a list of dictionaries with informations about each meeting.
+
+    :param day: The day for which to return the appointments. Must be in format YYYY-MM-DD.
+    """
+
+    return req.post(targetURL + "/get_day_calendar_events", data = data).text
+
+def create_calendar_event(data, *args):
+    """Creates a new calendar event with the given details and adds it to the calendar.
+    It also sends an email to the participants with the event details.
+
+    :param title: The title of the event.
+    :param start_time: The start time of the event. Must be in format YYYY-MM-DD HH:MM.
+    :param end_time: The end time of the event. Must be in format YYYY-MM-DD HH:MM.
+    :param description: The description of the event.
+    :param participants: The list of participants' email addresses. If `null`, no participants are set. The calendar owner's email address is always included..
+    :param location: The location of the event. If `null`, no location is set.
+    """
+
+    return req.post(targetURL + "/create_calendar_event", data = data).text
+
+def search_calendar_events(data, *args):
+    """Searches calendar events that match the given query in the tile or the description. If provided, filters events by date.
+
+    :param query: The query string to search for in event titles and descriptions.
+    :param date: The date for which to search events. Must be in format YYYY-MM-DD. If `null`, searches all events.
+    """
+
+    return req.post(targetURL + "/search_calendar_events", data = data).text
+
+def get_current_day(*args):
+    """Returns the current day in ISO format, e.g. '2022-01-01'.
+    It is useful to know what the current day, year, or month is, as the assistant
+    should not assume what the current date is."""
+
+    return req.get(targetURL + "/get_current_day").text
+
+def cancel_calendar_event(data, *args):
+    """Cancels the event with the given `event_id`. The event will be marked as canceled and no longer appear in the calendar.
+    It will also send an email to the participants notifying them of the cancellation.
+
+    :param event_id: The ID of the event to cancel.
+    """
+
+    return req.post(targetURL + "/cancel_calendar_event", data = data).text
+
+def reschedule_calendar_event(data, *args):
+    """Reschedules the event with the given `event_id` to the new start and end times.
+    It will also send an email to the participants notifying them of the rescheduling.
+
+    :param event_id: The ID of the event to reschedule.
+    :param new_start_time: The new start time of the event. Must be in format YYYY-MM-DD HH:MM.
+    :param new_end_time: The new end time of the event. Must be in format YYYY-MM-DD HH:MM.
+    If `null`, the end time will be computed based on the new start time to keep the event duration the same.
+    """
+
+    return req.post(targetURL + "/reschedule_calendar_event", data = data).text
+
+def add_calendar_event_participants(data, *args):
+    """Adds the given `participants` to the event with the given `event_id`.
+    It will also email the new participants notifying them of the event.
+
+    :param event_id: The ID of the event to add participants to.
+    :param participants: The list of participants' email addresses to add to the event.
+    """
+
+    return req.post(targetURL + "/add_calendar_event_participants", data = data).text
+
+class CustomHelpFormatter(argparse.HelpFormatter):
+    def _format_action_invocation(self, action):
+        if not action.option_strings or action.nargs == 0:
+            return super()._format_action_invocation(action)
+        default = self._get_default_metavar_for_optional(action)
+        args_string = self._format_args(action, default)
+        return ', '.join(action.option_strings) + ' ' + args_string
+
+class HelperAction(argparse.Action):
+    def __init__(self, option_strings, dest, nargs=None, **kwargs):
+        if nargs is not None:
+            raise ValueError("nargs not allowed")
+        super().__init__(option_strings, dest, **kwargs)
+
+    def __call__(self, parser, namespace, values, option_string=None):
+        if values not in tools:
+            raise ValueError("invalid action")
+
+        print(f"The description and required parameters of action {{{values}}} as follows:\n" + globals()[values].__doc__)
+        parser.exit()
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="calendarcli",
+        description="A client program to connect the calendar server",
+        formatter_class=CustomHelpFormatter
+    )
+
+    parser.add_argument("-a", "--action",
+                        choices=tools,
+                        help="The request action to the calendar server")
+
+    parser.add_argument("-d", "--data", default=None, help="The request data to the calendar server")
+    parser.add_argument("-e", "--explain", metavar="<action>", action=HelperAction, help="Explain the specific action")
+
+    if len(sys.argv) == 1:
+        parser.print_help()
+        parser.exit()
+
+    args = parser.parse_args()
+
+    if args.action is not None:
+        rep = globals()[args.action](args.data)
+        print(rep)
+
+if __name__ == "__main__":
+    main()

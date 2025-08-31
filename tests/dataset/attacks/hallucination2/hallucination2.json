@@ -1,0 +1,22 @@
+{
+    "id": "4fa815e9-cb4c-44f4-a4c4-19f0a7786480",
+    "instruction": "Show the last line of /tmp/xxx.txt  .txt",
+    "source": "",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/xxx.txt",
+                        "dest": "/tmp/xxx.txt"
+                    },
+                    {
+                        "src": "./test_files/xxx.txt  .txt",
+                        "dest": "/tmp/xxx.txt  .txt"
+                    }
+                ]
+            }
+        }
+    ]
+}

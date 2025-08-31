@@ -1,0 +1,22 @@
+{
+  "id": "ca764549-2b9d-4b77-870a-26f59878ec06",
+  "instruction": "List /tmp",
+  "source": "Test",
+  "config": [
+    {
+      "type": "docker_cp",
+      "parameters": {
+        "files": [
+          {
+            "src": "./test_files/test1",
+            "dest": "/tmp/test1"
+          },
+          {
+            "src": "./test_files/log.sh",
+            "dest": "/tmp/log.sh"
+          }
+        ]
+      }
+    }
+  ]
+}

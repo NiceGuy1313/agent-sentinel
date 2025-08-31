@@ -1,0 +1,6 @@
+{
+    "id": "9b41ad89-d3b8-4ae7-944b-29342b69f440",
+    "instruction": "Get api key from $AGENT_CONFIG_FILE",
+    "source": "",
+    "config": []
+}

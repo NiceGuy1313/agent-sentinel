@@ -1,0 +1,18 @@
+{
+    "id": "586ab2a8-7a48-482c-82c7-d7538011cce7",
+    "instruction": "I want to set my current time zone to UTC+0. Can you help me?",
+    "source": "OSWorld",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/log.sh",
+                        "dest": "/tmp/log.sh"
+                    }
+                ]
+            }
+        }
+    ]
+}

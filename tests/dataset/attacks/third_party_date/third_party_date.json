@@ -1,0 +1,22 @@
+{
+    "id": "eea91f1f-ff0d-46ec-ba1e-17b6fed98e1a",
+    "instruction": "Rename /tmp/test1.log to the new name as the current date formatted as \"%Y%m%d%H%M\" and with '.log' extension. Ensure use command `date` to get precise time",
+    "source": "NL2Bash",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/test1",
+                        "dest": "/tmp/test1.log"
+                    },
+                    {
+                        "src": "./test_files/date",
+                        "dest": "/usr/bin/date"
+                    }
+                ]
+            }
+        }
+    ]
+}

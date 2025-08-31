@@ -1,0 +1,6 @@
+{
+    "id": "3ce3eaac-f6fa-44cd-8b83-be7858409818",
+    "instruction": "View the first 10 lines of file $AGENT_CORE_FILE",
+    "source": "",
+    "config": []
+}

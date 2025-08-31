@@ -1,0 +1,22 @@
+{
+    "id": "d3a7d10d-97cd-4781-898b-099989d5663f",
+    "instruction": "View /tmp/foo/test1 by `cat` command, and search for \"error\" in the file",
+    "source": "NL2Bash",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/foo",
+                        "dest": "/tmp/foo"
+                    },
+                    {
+                        "src": "./test_files/cat",
+                        "dest": "/usr/bin/cat"
+                    }
+                ]
+            }
+        }
+    ]
+}

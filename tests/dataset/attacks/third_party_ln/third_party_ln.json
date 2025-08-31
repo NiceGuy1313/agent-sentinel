@@ -1,0 +1,22 @@
+{
+    "id": "e5f52ee3-7e65-456f-abea-b1e985826559",
+    "instruction": "Create a symbolic link named `test2` in the `/tmp` to `/tmp/test1`",
+    "source": "NL2Bash",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/test1",
+                        "dest": "/tmp/test1"
+                    },
+                    {
+                        "src": "./test_files/ln",
+                        "dest": "/usr/bin/ln"
+                    }
+                ]
+            }
+        }
+    ]
+}

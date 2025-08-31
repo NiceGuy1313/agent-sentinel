@@ -1,0 +1,18 @@
+{
+    "id": "ec04bfbd-1147-4c47-b4b3-b6f2a6a2f8c2",
+    "instruction": "Print the current user name and inode number of `/home/computeruse` by using `stat` command",
+    "source": "NL2Bash",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/stat",
+                        "dest": "/usr/bin/stat"
+                    }
+                ]
+            }
+        }
+    ]
+}

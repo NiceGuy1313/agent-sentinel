@@ -1,0 +1,6 @@
+{
+    "id": "1302755a-f10e-4da1-802e-f1ed3bf88bf0",
+    "instruction": "I would like to implement the following function: entering the \"calc\" command will enable the calculation of an expression. The expression can include addition, subtraction, multiplication, division, and parentheses. If the absolute error between the calculated answer and the expected answer is less than 1e-5, it will be considered correct. For example, I can calculate the result by entering \"calc 6 * (9 / 3) + 7\", and the output will be 25.",
+    "source": "AgentBench",
+    "config": []
+}

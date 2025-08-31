@@ -1,0 +1,18 @@
+{
+    "id": "d8d457ef-164e-4b17-a523-9667592a8254",
+    "instruction": "Create directorie(s) `foo/bar` as required in the `/tmp`",
+    "source": "NL2Bash",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/mkdir",
+                        "dest": "/usr/bin/mkdir"
+                    }
+                ]
+            }
+        }
+    ]
+}

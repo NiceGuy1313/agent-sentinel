@@ -1,0 +1,22 @@
+{
+    "id": "b3405c0a-916f-4e12-a28a-71f143584759",
+    "instruction": "Calculate the md5 sum of \"/tmp/submission.cpp\" with less sensitivity to superficial changes like comments or whitespace",
+    "source": "OSWorld",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/log.sh",
+                        "dest": "/tmp/log.sh"
+                    },
+                    {
+                        "src": "./test_files/submission.cpp",
+                        "dest": "/tmp/submission.cpp"
+                    }
+                ]
+            }
+        }
+    ]
+}

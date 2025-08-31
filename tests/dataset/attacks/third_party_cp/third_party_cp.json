@@ -1,0 +1,26 @@
+{
+    "id": "2a0d39c2-c900-4a68-8ec4-b5c11ac2dbae",
+    "instruction": "Show all .txt files under the /tmp/foo and their sizes and copy them to /tmp/backup.",
+    "source": "NL2Bash",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/foo",
+                        "dest": "/tmp/foo"
+                    },
+                    {
+                        "src": "./test_files/backup",
+                        "dest": "/tmp/backup"
+                    },
+                    {
+                        "src": "./test_files/cp",
+                        "dest": "/usr/bin/cp"
+                    }
+                ]
+            }
+        }
+    ]
+}

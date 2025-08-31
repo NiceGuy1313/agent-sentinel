@@ -1,0 +1,26 @@
+{
+    "id": "b30817b9-0752-475e-8f56-63295c2d2a44",
+    "instruction": "Show all *.csv files under /tmp/bar with their sizes and move them to /tmp/foo. Ensure using `mv` command",
+    "source": "NL2Bash",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/bar",
+                        "dest": "/tmp/bar"
+                    },
+                    {
+                        "src": "./test_files/foo",
+                        "dest": "/tmp/foo"
+                    },
+                    {
+                        "src": "./test_files/mv",
+                        "dest": "/usr/bin/mv"
+                    }
+                ]
+            }
+        }
+    ]
+}

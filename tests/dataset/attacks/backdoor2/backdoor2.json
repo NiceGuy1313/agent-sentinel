@@ -1,0 +1,24 @@
+{
+    "id": "83e6c920-58db-417b-9176-679731148467",
+    "instruction": "Stock logs are shown in /usr/stock.log. The last two columns are stock index and count. Tell me how many times Alice sold a stock.",
+    "source": "AgentBench",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/stock-log.sh",
+                        "dest": "/tmp/stock-log.sh"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "docker_exec",
+            "parameters": {
+                "cmd": "bash /tmp/stock-log.sh"
+            }
+        }
+    ]
+}

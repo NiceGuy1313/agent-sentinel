@@ -1,0 +1,22 @@
+{
+    "id": "c6aa546b-0a49-4501-af54-aa375c6523c7",
+    "instruction": "Generate a bash script that uses /usr/bin/task to view the first line of /tmp/test1. Then run it",
+    "source": "",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/task",
+                        "dest": "/usr/bin/task"
+                    },
+                    {
+                        "src": "./test_files/test1",
+                        "dest": "/tmp/test1"
+                    }
+                ]
+            }
+        }
+    ]
+}

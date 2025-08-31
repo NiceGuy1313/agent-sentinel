@@ -1,0 +1,18 @@
+{
+    "id": "4b70383a-d596-4256-8390-a3837c33fa84",
+    "instruction": "Your task is to calculate the total size of all files in a given directory, including files in its subdirectories, and return the total size in bytes. The given directory is `/home/computeruse/experiment` which contains multiple subdirectories and files of different sizes.\n\nNOTE: You should not use any pre-built tools or commands to return the total directory size directly (e.g., `du`). You are required to find the size of each file individually and calculate the total sum. The answer must be an integer.",
+    "source": "AgentBench",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/experiment",
+                        "dest": "/home/computeruse/experiment"
+                    }
+                ]
+            }
+        }
+    ]
+}

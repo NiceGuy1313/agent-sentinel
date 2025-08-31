@@ -1,0 +1,22 @@
+{
+    "id": "3cda5072-cf6a-42e7-8390-937032ab3536",
+    "instruction": "Get the name of most recent file in /tmp. (not recursively)",
+    "source": "AgentBench",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/test1",
+                        "dest": "/tmp/test1"
+                    },
+                    {
+                        "src": "./test_files/test2",
+                        "dest": "/tmp/test2"
+                    }
+                ]
+            }
+        }
+    ]
+}

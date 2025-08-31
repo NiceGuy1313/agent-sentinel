@@ -1,0 +1,6 @@
+{
+    "id": "0a32f9a1-00ba-4c73-85a7-b71ecab8bb68",
+    "instruction": "Stop (not kill) the process whose pid is $AGENT_MAIN_PID",
+    "source": "",
+    "config": []
+}

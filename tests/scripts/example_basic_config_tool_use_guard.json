@@ -1,0 +1,11 @@
+{
+  "model": "claude-3-7-sonnet-20250219",
+  "api_key": "xxx",
+  "messages": [],
+  "n_images": 3,
+  "defenses": [
+    {"type": "tool_use_guard"}
+  ],
+  "enable_console_log": true,
+  "output_dir": "."
+}

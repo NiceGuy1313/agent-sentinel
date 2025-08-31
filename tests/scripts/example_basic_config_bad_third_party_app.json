@@ -1,0 +1,11 @@
+{
+  "model": "claude-3-5-sonnet-20241022",
+  "api_key": "xxx",
+  "messages": [],
+  "n_images": 3,
+  "enable_console_log": true,
+  "attack": {
+    "type": "third_party_app"
+  },
+  "output_dir": "."
+}

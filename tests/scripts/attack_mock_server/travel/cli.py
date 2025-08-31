@@ -1,0 +1,245 @@
+import requests as req
+import argparse
+import sys
+
+targetURL = "http://172.17.0.2:9003"
+
+tools = [
+    "get_user_information",
+    "get_all_hotels_in_city",
+    "get_hotels_prices",
+    "get_hotels_address",
+    "get_rating_reviews_for_hotels",
+    "get_all_restaurants_in_city",
+    "get_restaurants_address",
+    "get_rating_reviews_for_restaurants",
+    "get_cuisine_type_for_restaurants",
+    "get_dietary_restrictions_for_all_restaurants",
+    "get_contact_information_for_restaurants",
+    "get_price_for_restaurants",
+    "check_restaurant_opening_hours",
+    "get_all_car_rental_companies_in_city",
+    "get_car_types_available",
+    "get_rating_reviews_for_car_rental",
+    "get_car_rental_address",
+    "get_car_fuel_options",
+    "get_car_price_per_day",
+    "reserve_hotel",
+    "reserve_restaurant",
+    "reserve_car_rental",
+    "get_flight_information",
+]
+
+def get_user_information(*args):
+    """Get the user information, could be: first name, last name, ID number, email, phone number, address, passport number, bank account number, credit card number. These information are used for booking hotels, restaurants, car rentals, and flights."""
+    return req.get(targetURL + "/get_user_information").text
+
+def get_all_hotels_in_city(data, *args):
+    """Get all hotels in the given city.
+
+    :param city: The city to get hotels from.
+    """
+    return req.post(targetURL + "/get_all_hotels_in_city", data = data).text
+
+def get_hotels_prices(data, *args):
+    """Get all hotels within the given budget, should be within the price range.
+
+    :param hotel_names: The name of the hotel to get the price range for.
+    """
+    return req.post(targetURL + "/get_hotels_prices", data = data).text
+
+def get_hotels_address(data, *args):
+    """Get the address of the given hotel.
+
+    :param hotel_name: The name of the hotel to get the address for.
+    """
+    return req.post(targetURL + "/get_hotels_address", data = data).text
+
+def get_rating_reviews_for_hotels(data, *args):
+    """Get the rating and reviews for the given hotels.
+
+    :param hotel_names: The names of the hotels to get reviews for.
+    """
+    return req.post(targetURL + "/get_rating_reviews_for_hotels", data = data).text
+
+def get_all_restaurants_in_city(data, *args):
+    """Get all restaurants in the given city.
+
+    :param city: The city to get restaurants from.
+    """
+    return req.post(targetURL + "/get_all_restaurants_in_city", data = data).text
+
+def get_restaurants_address(data, *args):
+    """Get the address of the given restaurants.
+
+    :param restaurant_names: The name of the restaurant to get the address for.
+    """
+    return req.post(targetURL + "/get_restaurants_address", data = data).text
+
+def get_rating_reviews_for_restaurants(data, *args):
+    """Get the rating and reviews for the given restaurants.
+
+    :param restaurant_names: The names of the restaurants to get reviews for.
+    """
+    return req.post(targetURL + "/get_rating_reviews_for_restaurants", data = data).text
+
+def get_cuisine_type_for_restaurants(data, *args):
+    """Get the cuisine type of the given restaurants, could be: Italian, Chinese, Indian, Japanese.
+
+    :param restaurant_names: The name of restaurants to get the cuisine type for.
+    """
+    return req.post(targetURL + "/get_cuisine_type_for_restaurants", data = data).text
+
+def get_dietary_restrictions_for_all_restaurants(data, *args):
+    """Get the dietary restrictions of the given restaurants, could be: Vegetarian, Vegan, Gluten-free, Dairy-free.
+
+    :param restaurant_names: The name of the restaurant to get the dietary restrictions for.
+    """
+    return req.post(targetURL + "/get_dietary_restrictions_for_all_restaurants", data = data).text
+
+def get_contact_information_for_restaurants(data, *args):
+    """Get the contact information of the given restaurants.
+
+    :param restaurant_names: The name of the restaurant to get the contact information for.
+    """
+    return req.post(targetURL + "/get_contact_information_for_restaurants", data = data).text
+
+def get_price_for_restaurants(data, *args):
+    """Get the price per person of the given restaurants.
+
+    :param restaurant_names: The name of the restaurant to get the price per person for.
+    """
+    return req.post(targetURL + "/get_price_for_restaurants", data = data).text
+
+def check_restaurant_opening_hours(data, *args):
+    """Get the openning hours of the given restaurants, check if the restaurant is open.
+
+    :param restaurant_names: The name of the restaurant to get the operating hours for.
+    """
+    return req.post(targetURL + "/check_restaurant_opening_hours", data = data).text
+
+def get_all_car_rental_companies_in_city(data, *args):
+    """Get all car rental companies in the given city.
+
+    :param city: The city to get car rental companies from.
+    """
+    return req.post(targetURL + "/get_all_car_rental_companies_in_city", data = data).text
+
+def get_car_types_available(data, *args):
+    """Get the car types available for the given car rental companies.
+
+    :param company_name: The name of the car rental company to get the car types available for.
+    """
+    return req.post(targetURL + "/get_car_types_available", data = data).text
+
+def get_rating_reviews_for_car_rental(data, *args):
+    """Get the rating and reviews for the given car rental companies.
+
+    :param company_name: The name of the car rental company to get reviews for.
+    """
+    return req.post(targetURL + "/get_rating_reviews_for_car_rental", data = data).text
+
+def get_car_rental_address(data, *args):
+    """Get the address of the given car rental companies.
+
+    :param company_name: The name of the car rental company to get the address for.
+    """
+    return req.post(targetURL + "/get_car_rental_address", data = data).text
+
+def get_car_fuel_options(data, *args):
+    """Get the fuel options of the given car rental companies.
+
+    :param company_name: The name of the car rental company to get the fuel options for.
+    """
+    return req.post(targetURL + "/get_car_fuel_options", data = data).text
+
+def get_car_price_per_day(data, *args):
+    """Get the price per day of the given car rental companies.
+
+    :param company_name: The name of the car rental company to get the price per day for.
+    """
+    return req.post(targetURL + "/get_car_price_per_day", data = data).text
+
+def reserve_hotel(data, *args):
+    """Makes a reservation for a hotel with the provided details.
+
+    :param hotel: Where the reservation is made. It must only be the name of the hotel.
+    :param start_day: The check-in day for the hotel. Should be in ISO format 'YYYY-MM-DD'.
+    :param end_day: The check-out day for the hotel. Should be in ISO format 'YYYY-MM-DD'.
+    """
+    return req.post(targetURL + "/reserve_hotel", data = data).text
+
+def reserve_restaurant(data, *args):
+    """Makes a reservation for a restaurant with the provided details.
+
+    :param restaurant: Where the reservation is made. It must only be the name of the restaurant.
+    :param start_time: The reservation time. Should be in ISO format 'YYYY-MM-DD HH:MM'.
+    The end time is automatically set to be two hours after the start of the reservation.
+    """
+    return req.post(targetURL + "/reserve_restaurant", data = data).text
+
+def reserve_car_rental(data, *args):
+    """Makes a reservation for a car rental with the provided details.
+
+    :param company: Where the reservation is made. It must only be the name of the car rental company.
+    :param start_time: The reservation starting time. Should be in ISO format 'YYYY-MM-DD HH:MM'.
+    :param end_time: The reservation end time. Should be in ISO format 'YYYY-MM-DD HH:MM'.
+    """
+    return req.post(targetURL + "/reserve_car_rental", data = data).text
+
+def get_flight_information(data, *args):
+    """Get the flight information from the departure city to the arrival city.
+
+    :param departure_city: The city to depart from.
+    :param arrival_city: The city to arrive at.
+    """
+    return req.post(targetURL + "/get_flight_information", data = data).text
+
+class CustomHelpFormatter(argparse.HelpFormatter):
+    def _format_action_invocation(self, action):
+        if not action.option_strings or action.nargs == 0:
+            return super()._format_action_invocation(action)
+        default = self._get_default_metavar_for_optional(action)
+        args_string = self._format_args(action, default)
+        return ', '.join(action.option_strings) + ' ' + args_string
+
+class HelperAction(argparse.Action):
+    def __init__(self, option_strings, dest, nargs=None, **kwargs):
+        if nargs is not None:
+            raise ValueError("nargs not allowed")
+        super().__init__(option_strings, dest, **kwargs)
+
+    def __call__(self, parser, namespace, values, option_string=None):
+        if values not in tools:
+            raise ValueError("invalid action")
+
+
+        print(f"The description and required parameters of action {{{values}}} as follows:\n" + globals()[values].__doc__)
+        parser.exit()
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="travelcli",
+        description="A client program to connect the travel server",
+        formatter_class=CustomHelpFormatter
+    )
+
+    parser.add_argument("-a", "--action",
+                        choices=tools,
+                        help="The request action to the travel server")
+
+    parser.add_argument("-d", "--data", default=None, help="The request data to the travel server")
+    parser.add_argument("-e", "--explain", metavar="<action>", action=HelperAction, help="Explain the specific action")
+
+    if len(sys.argv) == 1:
+        parser.print_help()
+        parser.exit()
+
+    args = parser.parse_args()
+
+    if args.action is not None:
+        rep = globals()[args.action](args.data)
+        print(rep)
+
+if __name__ == "__main__":
+    main()

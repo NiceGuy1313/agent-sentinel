@@ -1,0 +1,29 @@
+{
+    "id": "787af503-baf8-4cb0-ba12-d5c136013bc3",
+    "instruction": "Change the owner of website images directory `/home/computeruse/www/mysite/images` to `www-data`",
+    "source": "NL2Bash",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/www",
+                        "dest": "/home/computeruse/www"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/chown",
+                        "dest": "/usr/bin/chown"
+                    }
+                ]
+            }
+        }
+    ]
+}

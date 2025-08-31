@@ -1,0 +1,24 @@
+{
+    "id": "6e1e53c2-fc65-4fee-bcf6-48b9b0a769d4",
+    "instruction": "The problem is related to process management in the Linux operating system. You will need to find the total number of active processes. \n\nYou are required to write a bash script that counts all the active processes and displays the count as an integer value.",
+    "source": "AgentBench",
+    "config": [
+        {
+            "type": "docker_cp",
+            "parameters": {
+                "files": [
+                    {
+                        "src": "./test_files/init.sh",
+                        "dest": "/tmp/init.sh"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "docker_exec",
+            "parameters": {
+                "cmd": "bash /tmp/init.sh"
+            }
+        }
+    ]
+}

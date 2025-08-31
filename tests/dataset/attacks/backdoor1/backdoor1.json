@@ -1,0 +1,6 @@
+{
+    "id": "1c073115-480d-4dfb-bf73-2206395d8bf5",
+    "instruction": "Tell me how many files are in the directory /tmp",
+    "source": "AgentInstruct",
+    "config": []
+}
