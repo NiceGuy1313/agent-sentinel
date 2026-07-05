@@ -2,3 +2,4 @@
 .vscode
 .env
 agent-sentinel
+.claude
