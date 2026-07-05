@@ -427,6 +427,7 @@ const (
 	AuditBaseLLMCustom     = "custom"
 	AuditBaseLLMCladue35   = "claude-3-5-sonnet-20241022"
 	AuditBaseLLMCladue37   = "claude-3-7-sonnet-20250219"
+	AuditBaseLLMCladue45   = "claude-sonnet-4-5-20250929"
 	AuditBaseLLMGPT4Turbor = "openai/gpt-4-turbo"
 	AuditBaseLLMGPT4o      = "openai/gpt-4o"
 

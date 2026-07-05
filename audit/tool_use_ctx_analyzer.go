@@ -22,6 +22,8 @@ func NewToolUseCtxAnalyzer(TaskCtxSummarizingLLMType string, CustomizedTaskCtxSu
 	analyzer := &ToolUseCtxAnalyzer{}
 
 	switch TaskCtxSummarizingLLMType {
+	case AuditBaseLLMCladue45:
+		fallthrough
 	case AuditBaseLLMCladue35:
 		fallthrough
 	case AuditBaseLLMCladue37:

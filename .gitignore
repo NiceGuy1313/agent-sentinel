@@ -3,3 +3,7 @@
 .env
 agent-sentinel
 .claude
+tests/scripts/normal_run_config.json
+tests/scripts/run_results/
+tests/scripts/*_run_config.json
+tests/scripts/run_results_sandbox/

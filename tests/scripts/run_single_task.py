@@ -13,7 +13,7 @@ import docker
 import docker.errors
 
 
-HOST_MOUNT_DIR = "~/.anthropic"
+HOST_MOUNT_DIR = "/home/agentsentinel/.anthropic"
 CON_MOUNT_DIR = "/home/computeruse/.anthropic"
 AGENT_IMAGE = "computer-use-demo-test"
 AGENT_USER = "computeruse"

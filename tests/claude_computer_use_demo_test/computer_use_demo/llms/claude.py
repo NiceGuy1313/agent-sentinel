@@ -69,6 +69,30 @@ model_groups = {
                 "type":"text_editor_20250124"
             }
         ]
+    },
+
+    # The paper's models (3.5/3.7 sonnet) are retired on the API; sonnet-4-5 is the
+    # closest available substitute. Computer/bash tools stay on the 20250124 betas,
+    # but the text editor must be text_editor_20250728 (name str_replace_based_edit_tool).
+    "claude-sonnet-4-5-20250929": {
+        "betas": ["computer-use-2025-01-24"],
+        "tools": [
+            {
+                "name":"computer",
+                "type":"computer_20250124",
+                "display_width_px":1024,
+                "display_height_px":768,
+                "display_number":1
+            },
+            {
+                "type":"bash_20250124",
+                "name":"bash"
+            },
+            {
+                "name":"str_replace_based_edit_tool",
+                "type":"text_editor_20250728"
+            }
+        ]
     }
 }
 

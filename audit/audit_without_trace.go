@@ -27,6 +27,8 @@ func NewAuditWithoutTrace(config *Config) (*AuditWithoutTrace, error) {
 
 	systemPrompt := SecurityQueryWithoutTraceSystemPrompt
 	switch config.SecurityQueryBaseLLM {
+	case AuditBaseLLMCladue45:
+		fallthrough
 	case AuditBaseLLMCladue35:
 		fallthrough
 	case AuditBaseLLMCladue37:

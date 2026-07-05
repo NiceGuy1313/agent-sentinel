@@ -97,7 +97,7 @@ class Agent:
         if self.defense is not None:
             self.system_prompt = self.defense.secure_system_prompt(self.system_prompt)
 
-        if self.model == "claude-3-5-sonnet-20241022" or self.model == "claude-3-7-sonnet-20250219":
+        if self.model.startswith("claude-"):
             self.llm_client = ClaudeLLM(
                 api_key=self.api_key,
                 model=self.model,

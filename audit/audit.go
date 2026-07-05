@@ -45,6 +45,8 @@ func NewAudit(config *Config) (*Audit, error) {
 
 	// set up security query client
 	switch config.SecurityQueryBaseLLM {
+	case AuditBaseLLMCladue45:
+		fallthrough
 	case AuditBaseLLMCladue35:
 		fallthrough
 	case AuditBaseLLMCladue37:
