@@ -10,6 +10,7 @@ import (
 	"agent-sentinel/audit/filters"
 	"agent-sentinel/audit/llm"
 	"agent-sentinel/tracer"
+	"strings"
 	"sync"
 	"text/template"
 	"time"
@@ -56,6 +57,8 @@ func NewAudit(config *Config) (*Audit, error) {
 			return nil, err
 		}
 		audit.securityQueryClient = claudeClient
+	case AuditBaseLLMGPTOSS:
+		fallthrough
 	case AuditBaseLLMGPT4Turbor:
 		fallthrough
 	case AuditBaseLLMGPT4o:
@@ -405,6 +408,21 @@ func (audit *Audit) FilterFileEvent(e *tracer.FileEvent) bool {
 }
 
 func (audit *Audit) FilterNetEvent(e *tracer.SocketEvent) bool {
+	// Pre-approve the agent's own required infrastructure so the audit LLM only
+	// judges task-relevant operations rather than the agent's own plumbing:
+	//   - DNS resolution (port 53)
+	//   - connections to the agent's model API (api.anthropic.com)
+	// This is applied regardless of the audit backend, keeping Claude-vs-gpt-oss
+	// comparisons focused on the same (task-relevant) operations.
+	if e.RemotePort == 53 {
+		return true
+	}
+	if audit.DNSCache != nil {
+		if domain, err := audit.DNSCache.IP2Domain(e.RemoteIP); err == nil && strings.Contains(domain, "anthropic.com") {
+			return true
+		}
+	}
+
 	if audit.NetFilter == nil {
 		return false
 	}

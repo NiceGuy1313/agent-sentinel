@@ -3,6 +3,7 @@ import datetime
 import json
 import os
 import subprocess
+import sys
 
 
 NORMAL = ['test', 'all', 'attack4agent', 'backdoor', 'bad_tool_result', 'hallucination', 'third_party_app', 'direct_task_inject']
@@ -196,6 +197,12 @@ def load_config(config):
 def run_all_tasks(config):
     config = load_config(config)
 
+    # per-task timing log (written incrementally so partial runs are still usable)
+    timing_path = os.path.join(config["output_dir"], "timing.jsonl")
+    run_start = datetime.datetime.now()
+    with open(timing_path, "a") as tf:
+        tf.write(json.dumps({"event": "run_start", "time": run_start.isoformat()}) + "\n")
+
     # run each task
     for task_set in config["tasks"]:
         with open(config["config"]) as f:
@@ -230,12 +237,35 @@ def run_all_tasks(config):
                 json.dump(basic_config, f)
 
             print(f"[*] running task `{task}`")
+            t0 = datetime.datetime.now()
             outs = subprocess.run(
-                ["python", "run_single_task.py", task_basic_config, task],
+                [sys.executable, "run_single_task.py", task_basic_config, task],
                 capture_output=True,
             )
+            t1 = datetime.datetime.now()
+            rec = {
+                "event": "task",
+                "attack": task_set["type"],
+                "task": os.path.basename(task),
+                "start": t0.isoformat(),
+                "end": t1.isoformat(),
+                "seconds": round((t1 - t0).total_seconds(), 1),
+                "returncode": outs.returncode,
+            }
+            with open(timing_path, "a") as tf:
+                tf.write(json.dumps(rec) + "\n")
+            print(f"[*] task `{os.path.basename(task)}` done in {rec['seconds']}s (rc={outs.returncode})")
 
             print(outs)
+
+    run_end = datetime.datetime.now()
+    with open(timing_path, "a") as tf:
+        tf.write(json.dumps({
+            "event": "run_end",
+            "time": run_end.isoformat(),
+            "total_seconds": round((run_end - run_start).total_seconds(), 1),
+        }) + "\n")
+    print(f"[*] ALL DONE in {round((run_end - run_start).total_seconds(), 1)}s; timing -> {timing_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Script for running a set of tasks')

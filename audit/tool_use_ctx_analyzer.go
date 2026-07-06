@@ -33,6 +33,8 @@ func NewToolUseCtxAnalyzer(TaskCtxSummarizingLLMType string, CustomizedTaskCtxSu
 			return nil, err
 		}
 		analyzer.queryClient = claudeClient
+	case AuditBaseLLMGPTOSS:
+		fallthrough
 	case AuditBaseLLMGPT4Turbor:
 		fallthrough
 	case AuditBaseLLMGPT4o:

@@ -24,10 +24,16 @@ func NewOpenAIClient(model string, systemPrompt string) (*OpenAIClient, error) {
 		return nil, fmt.Errorf("audit: API key is missing")
 	}
 
+	clientOpts := []option.RequestOption{option.WithAPIKey(apikey)}
+	// Allow pointing at an OpenAI-compatible endpoint (e.g. a host Ollama server
+	// exposing gpt-oss) via OPENAI_BASE_URL, like http://<host-ip>:11434/v1.
+	if baseURL := os.Getenv("OPENAI_BASE_URL"); baseURL != "" {
+		clientOpts = append(clientOpts, option.WithBaseURL(baseURL))
+		log.Debug().Msgf("openai: using custom base URL %s", baseURL)
+	}
+
 	oc := &OpenAIClient{
-		Client: openai.NewClient(
-			option.WithAPIKey(apikey),
-		),
+		Client:         openai.NewClient(clientOpts...),
 		MessageHistory: []openai.ChatCompletionMessageParamUnion{},
 		SystemPrompt:   systemPrompt,
 		Model:          model,

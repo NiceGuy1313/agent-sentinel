@@ -77,6 +77,10 @@ def load_basic_config(config_file):
 
     config = {
         "model": data["model"],
+        # audit_model is the LLM agent-sentinel uses for its security queries
+        # (the defender). Defaults to the agent model, but can be set separately
+        # to compare audit backends (e.g. Claude vs a local gpt-oss via Ollama).
+        "audit_model": data.get("audit_model", data["model"]),
         "api_key": data["api_key"],
         "n_images": data["n_images"],
         "max_requests": 30,
@@ -372,9 +376,9 @@ def run (basic_config_file, task_config_file):
         if "defenses" in test_config:
             for defense in test_config["defenses"]:
                 if defense["type"] == "sandbox" and sandbox_proc is None:
-                    sandbox_proc = setup_sandbox(container, sandbox_log_file, basic_config["model"])
+                    sandbox_proc = setup_sandbox(container, sandbox_log_file, basic_config["audit_model"])
                 if defense["type"] == "tool_use_guard" and tool_use_guard_proc is None:
-                    tool_use_guard_proc = setup_tool_use_guard(tool_use_guard_log_file, basic_config["model"])
+                    tool_use_guard_proc = setup_tool_use_guard(tool_use_guard_log_file, basic_config["audit_model"])
 
         if task_config_file in TIMEOUT_TABLE:
             exitcode, stdout, stderr = run_single_task(container, test_file, basic_config["enable_console_log"], TIMEOUT_TABLE[task_config_file])
