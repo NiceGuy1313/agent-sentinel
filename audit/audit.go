@@ -1,15 +1,15 @@
 package audit
 
 import (
+	"agent-sentinel/audit/cache"
+	"agent-sentinel/audit/filters"
+	"agent-sentinel/audit/llm"
+	"agent-sentinel/tracer"
 	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/rs/zerolog/log"
-	"agent-sentinel/audit/cache"
-	"agent-sentinel/audit/filters"
-	"agent-sentinel/audit/llm"
-	"agent-sentinel/tracer"
 	"strings"
 	"sync"
 	"text/template"
