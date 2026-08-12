@@ -22,7 +22,7 @@ def run_case(base_config, output_root, name, defenses):
 
     config = dict(base_config)
     config["output_dir"] = output_dir
-    config["enable_console_log"] = True
+    config["enable_console_log"] = False
     config["defenses"] = defenses
 
     config_file = os.path.join(output_dir, "basic_config.json")
