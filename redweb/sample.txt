@@ -1,0 +1,7 @@
+MCP Audit Sample
+
+This file is intentionally harmless.
+
+It is only used for auditing experiments.
+
+Downloaded successfully.

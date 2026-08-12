@@ -121,15 +121,62 @@ def load_task_config(config_file):
 
     config = {
         "id": data["id"],
-        # TODO system prompt
         "instruction": data["instruction"],
         "config": data["config"],
     }
 
+    if "system_prompt" in data:
+        config["system_prompt"] = data["system_prompt"]
     if "post_instruction" in data:
         config["post_instruction"] = data["post_instruction"]
+    if "verification" in data:
+        config["verification"] = data["verification"]
+    if "artifacts" in data:
+        config["artifacts"] = data["artifacts"]
 
     return config
+
+def run_verifications(con, verification, output_file):
+    results = []
+    for check in verification:
+        if check.get("type") != "command":
+            raise ValueError(f"Unsupported verification type: {check.get('type')}")
+
+        exitcode, output = con.exec_run(
+            user=check.get("user", AGENT_USER),
+            cmd=check["cmd"],
+            demux=True,
+        )
+        stdout = output[0].decode(errors="replace") if output[0] else ""
+        stderr = output[1].decode(errors="replace") if output[1] else ""
+        expected_exitcode = check.get("expect_exit_code", 0)
+        result = {
+            "name": check["name"],
+            "passed": exitcode == expected_exitcode,
+            "exitcode": exitcode,
+            "expected_exitcode": expected_exitcode,
+            "stdout": stdout,
+            "stderr": stderr,
+        }
+        results.append(result)
+        print("[*] Verification `{}`: {}".format(
+            check["name"], "PASS" if result["passed"] else "FAIL"))
+
+    with open(output_file, "w") as f:
+        json.dump(results, f, indent=2)
+
+    return results
+
+def collect_artifacts(con, artifacts, output_dir):
+    for artifact in artifacts:
+        destination = os.path.join(output_dir, artifact["dest"])
+        try:
+            copy_from_container_to_host(con, artifact["src"], destination)
+            print(f"[*] Collected artifact `{artifact['src']}` -> `{destination}`")
+        except Exception:
+            if not artifact.get("optional", False):
+                raise
+            print(f"[*] Optional artifact `{artifact['src']}` was not present")
 
 # test config for run agent test
 def generate_test_config(basic, task):
@@ -137,7 +184,7 @@ def generate_test_config(basic, task):
         "model": basic["model"],
         "api_key": basic["api_key"],
         "n_images": basic["n_images"],
-        "system_prompt": "",
+        "system_prompt": task.get("system_prompt", ""),
         "messages": [],
         "max_requests": basic["max_requests"],
         "task_input": task["instruction"],
@@ -391,6 +438,14 @@ def run (basic_config_file, task_config_file):
 
         if agent_log_file != "":
             copy_from_container_to_host(container, AGENT_LOG_FILE, agent_log_file)
+
+        if "verification" in task_config:
+            verification_file = os.path.join(
+                basic_config["output_dir"], task_config["id"] + "_verification.json")
+            run_verifications(container, task_config["verification"], verification_file)
+
+        if "artifacts" in task_config:
+            collect_artifacts(container, task_config["artifacts"], basic_config["output_dir"])
 
         # handle errors from agent
         if stderr is not None and stderr != b"":
