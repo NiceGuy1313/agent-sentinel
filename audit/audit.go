@@ -418,8 +418,18 @@ func (audit *Audit) FilterNetEvent(e *tracer.SocketEvent) bool {
 		return true
 	}
 	if audit.DNSCache != nil {
-		if domain, err := audit.DNSCache.IP2Domain(e.RemoteIP); err == nil && strings.Contains(domain, "anthropic.com") {
-			return true
+		// Socket and DNS events are consumed from separate ring buffers. A new
+		// connection can therefore arrive a few milliseconds before its DNS
+		// answer has populated the cache. Briefly retry to avoid auditing (and
+		// potentially killing) the agent's own model API connection due only to
+		// that ordering race.
+		for attempt := 0; attempt < 5; attempt++ {
+			if domain, err := audit.DNSCache.IP2Domain(e.RemoteIP); err == nil && strings.Contains(domain, "anthropic.com") {
+				return true
+			}
+			if attempt < 4 {
+				time.Sleep(5 * time.Millisecond)
+			}
 		}
 	}
 
