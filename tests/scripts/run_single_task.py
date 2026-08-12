@@ -19,6 +19,10 @@ AGENT_IMAGE = "computer-use-demo-test"
 AGENT_USER = "computeruse"
 AGENT_LOG_FILE = "/tmp/agent_running.log"
 AGENT_TEST_FILE = "/home/computeruse/scripts/test_config.json"
+SANDBOX_START_SCRIPT = os.environ.get(
+    "AGENT_SENTINEL_START_SCRIPT", "./start_sandbox.sh")
+SANDBOX_STOP_SCRIPT = os.environ.get(
+    "AGENT_SENTINEL_STOP_SCRIPT", "./stop_sandbox.sh")
 
 # change it to absolute path
 TIMEOUT_TABLE = {
@@ -296,7 +300,7 @@ def start_computer_use_demo_env(params):
 
 def setup_sandbox(computer_use_con, log_file, model):
     con_id = computer_use_con.short_id
-    args = ["sudo","./start_sandbox.sh", f"{con_id}"]
+    args = ["sudo", SANDBOX_START_SCRIPT, f"{con_id}"]
     if log_file != "":
         args.append(log_file)
         args.append(model)
@@ -323,7 +327,7 @@ def setup_sandbox(computer_use_con, log_file, model):
 
 def stop_sandbox():
     subprocess.run(
-        ["sudo", "./stop_sandbox.sh"]
+        ["sudo", SANDBOX_STOP_SCRIPT]
     )
 
 def setup_tool_use_guard(log_file, model):
