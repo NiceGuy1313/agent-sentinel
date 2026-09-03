@@ -240,11 +240,12 @@ def run_all_tasks(config):
             # Pass credentials to the child process only through its
             # environment. Generated result configs are commonly archived or
             # committed and must not contain live API keys.
-            api_key = basic_config.get("api_key", "")
             task_environment = os.environ.copy()
             if basic_config["model"].startswith("claude-"):
+                api_key = task_environment.get("ANTHROPIC_API_KEY", basic_config.get("api_key", ""))
                 task_environment["ANTHROPIC_API_KEY"] = api_key
             else:
+                api_key = task_environment.get("OPENAI_API_KEY", basic_config.get("api_key", ""))
                 task_environment["OPENAI_API_KEY"] = api_key
             basic_config["api_key"] = "[REDACTED: supplied via environment]"
 

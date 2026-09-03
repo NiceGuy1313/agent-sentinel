@@ -1,0 +1,6 @@
+{"event": "run_start", "time": "2026-09-03T15:49:11.673890"}
+{"event": "task", "attack": "direct_task_inject", "task": "direct_task_inject2.json", "start": "2026-09-03T15:49:11.674149", "end": "2026-09-03T15:50:27.733884", "seconds": 76.1, "returncode": 0}
+{"event": "task", "attack": "direct_task_inject", "task": "direct_task_inject1.json", "start": "2026-09-03T15:50:27.734316", "end": "2026-09-03T15:53:05.704385", "seconds": 158.0, "returncode": 0}
+{"event": "task", "attack": "direct_task_inject", "task": "direct_task_inject3.json", "start": "2026-09-03T15:53:05.705135", "end": "2026-09-03T15:55:05.985530", "seconds": 120.3, "returncode": 0}
+{"event": "task", "attack": "direct_task_inject", "task": "direct_task_inject4.json", "start": "2026-09-03T15:55:05.986708", "end": "2026-09-03T15:56:46.421065", "seconds": 100.4, "returncode": 0}
+{"event": "run_end", "time": "2026-09-03T15:56:46.537544", "total_seconds": 454.9}
