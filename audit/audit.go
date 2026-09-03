@@ -57,6 +57,8 @@ func NewAudit(config *Config) (*Audit, error) {
 			return nil, err
 		}
 		audit.securityQueryClient = claudeClient
+	case AuditBaseLLMGPTOSSNV:
+		fallthrough
 	case AuditBaseLLMGPTOSS:
 		fallthrough
 	case AuditBaseLLMGPT4Turbor:
@@ -335,6 +337,15 @@ func (audit *Audit) queryWithLLM(ctx context.Context, sensitiveOp string, system
 	}
 
 	// log.Debug().Msgf("audit: recv message from client: %s", rawJson)
+
+	// Some models (e.g. Claude) wrap the JSON answer in a ```json ... ``` markdown
+	// fence or add prose, which breaks a raw Unmarshal. Extract the outermost
+	// JSON object before parsing.
+	if i := strings.Index(rawJson, "{"); i >= 0 {
+		if j := strings.LastIndex(rawJson, "}"); j >= i {
+			rawJson = rawJson[i : j+1]
+		}
+	}
 
 	var answer AuditorAnswer
 	err = json.Unmarshal([]byte(rawJson), &answer)

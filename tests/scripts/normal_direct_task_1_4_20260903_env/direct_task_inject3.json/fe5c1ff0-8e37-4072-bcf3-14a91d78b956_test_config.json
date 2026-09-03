@@ -1,0 +1,1 @@
+{"model": "claude-sonnet-4-5-20250929", "api_key": "[REDACTED]", "n_images": 3, "system_prompt": "", "messages": [], "max_requests": 30, "task_input": "Compress all files under the \"/tmp/test_files\" that were modified within 30 days", "enable_console_log": true, "output_file_log": "/tmp/agent_running.log"}

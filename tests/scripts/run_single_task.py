@@ -75,13 +75,19 @@ def load_basic_config(config_file):
     with open(config_file, "r") as f:
         data = json.load(f)
 
+    model = data["model"]
+    if model.startswith("claude-"):
+        api_key = os.environ.get("ANTHROPIC_API_KEY", data["api_key"])
+    else:
+        api_key = os.environ.get("OPENAI_API_KEY", data["api_key"])
+
     config = {
-        "model": data["model"],
+        "model": model,
         # audit_model is the LLM agent-sentinel uses for its security queries
         # (the defender). Defaults to the agent model, but can be set separately
         # to compare audit backends (e.g. Claude vs a local gpt-oss via Ollama).
         "audit_model": data.get("audit_model", data["model"]),
-        "api_key": data["api_key"],
+        "api_key": api_key,
         "n_images": data["n_images"],
         "max_requests": 30,
         "enable_console_log": False,
@@ -95,7 +101,9 @@ def load_basic_config(config_file):
         config["enable_console_log"] = data["enable_console_log"]
 
     if "output_dir" in data:
-        config["output_dir"] = os.path.realpath(data["output_dir"], strict=True)
+        config["output_dir"] = os.path.realpath(data["output_dir"])
+        if not os.path.exists(config["output_dir"]):
+            raise FileNotFoundError(config["output_dir"])
     else:
         config["output_dir"] = os.path.join(os.getcwd(), "task_output_" + str(round(datetime.datetime.now().timestamp())))
 
@@ -165,6 +173,16 @@ def generate_test_config(basic, task):
     print("[*] Enabled attack: {}".format(test["attack"]["type"] if "attack" in test else "None"))
 
     return test, test_file
+
+def redact_test_config_api_key(test_file):
+    if not test_file or not os.path.exists(test_file):
+        return
+    with open(test_file, "r") as f:
+        test = json.load(f)
+    if "api_key" in test:
+        test["api_key"] = "[REDACTED: supplied via environment]"
+        with open(test_file, "w") as f:
+            json.dump(test, f)
 
 def setup_running_env(con, setup, mock_servers):
     for step in setup:
@@ -341,12 +359,18 @@ def run_single_task(con, test_file, stream = False, timeout = -1):
 
 def run (basic_config_file, task_config_file):
     run_single_task_error_file = ""
-    basic_config_file = os.path.realpath(basic_config_file, strict=True)
-    task_config_file = os.path.realpath(task_config_file, strict=True)
+    # Python 3.8's os.path.realpath does not support the ``strict`` argument.
+    basic_config_file = os.path.realpath(basic_config_file)
+    task_config_file = os.path.realpath(task_config_file)
+    if not os.path.exists(basic_config_file):
+        raise FileNotFoundError(basic_config_file)
+    if not os.path.exists(task_config_file):
+        raise FileNotFoundError(task_config_file)
     container = None
     sandbox_proc = None
     tool_use_guard_proc = None
     basic_config = None
+    test_file = ""
 
     try:
         # load config
@@ -384,6 +408,8 @@ def run (basic_config_file, task_config_file):
             exitcode, stdout, stderr = run_single_task(container, test_file, basic_config["enable_console_log"], TIMEOUT_TABLE[task_config_file])
         else:
             exitcode, stdout, stderr = run_single_task(container, test_file, basic_config["enable_console_log"])
+
+        redact_test_config_api_key(test_file)
 
         if stdout is not None and stdout != b"":
             print("----------agent_stdout-------------")
@@ -428,6 +454,7 @@ def run (basic_config_file, task_config_file):
             basic_config["mock_servers"][name].stop()
 
     except Exception as e:
+        redact_test_config_api_key(test_file)
         if container is not None:
             container.stop()
         if basic_config is not None and "mock_servers" in basic_config:

@@ -38,6 +38,8 @@ func NewAuditWithoutTrace(config *Config) (*AuditWithoutTrace, error) {
 			return nil, err
 		}
 		audit.securityQueryClient = claudeClient
+	case AuditBaseLLMGPTOSSNV:
+		fallthrough
 	case AuditBaseLLMGPTOSS:
 		fallthrough
 	case AuditBaseLLMGPT4Turbor:

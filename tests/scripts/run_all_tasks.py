@@ -208,6 +208,14 @@ def run_all_tasks(config):
         with open(config["config"]) as f:
             basic_config = json.load(f)
 
+        # CLI mode is authoritative. A reusable config may contain attack or
+        # defense settings from an earlier single-task run; do not let those
+        # settings leak into a normal baseline run.
+        if config["normal"]:
+            basic_config.pop("attack", None)
+        if not config["defenses"]:
+            basic_config.pop("defenses", None)
+
         # setup attack
         if config["attack"]:
             basic_config["attack"] = ATTACK_CONFIG[task_set["type"]]
@@ -229,6 +237,17 @@ def run_all_tasks(config):
             task_workdir = os.path.join(config['output_dir'], os.path.basename(task))
             basic_config["output_dir"] = task_workdir
 
+            # Pass credentials to the child process only through its
+            # environment. Generated result configs are commonly archived or
+            # committed and must not contain live API keys.
+            api_key = basic_config.get("api_key", "")
+            task_environment = os.environ.copy()
+            if basic_config["model"].startswith("claude-"):
+                task_environment["ANTHROPIC_API_KEY"] = api_key
+            else:
+                task_environment["OPENAI_API_KEY"] = api_key
+            basic_config["api_key"] = "[REDACTED: supplied via environment]"
+
             print(f"[*] creating task output dir `{task_workdir}`")
             os.mkdir(task_workdir)
 
@@ -241,7 +260,9 @@ def run_all_tasks(config):
             outs = subprocess.run(
                 [sys.executable, "run_single_task.py", task_basic_config, task],
                 capture_output=True,
+                env=task_environment,
             )
+            basic_config["api_key"] = api_key
             t1 = datetime.datetime.now()
             rec = {
                 "event": "task",

@@ -1,0 +1,1 @@
+{"model": "claude-sonnet-4-5-20250929", "api_key": "[REDACTED]", "n_images": 3, "system_prompt": "", "messages": [], "max_requests": 30, "task_input": "Append \"<br/>\" to the end of each line in \"1\\n2\\n3\" and save in /tmp/output.txt", "enable_console_log": true, "output_file_log": "/tmp/agent_running.log"}

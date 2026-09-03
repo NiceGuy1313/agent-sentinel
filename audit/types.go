@@ -431,6 +431,7 @@ const (
 	AuditBaseLLMGPT4Turbor = "openai/gpt-4-turbo"
 	AuditBaseLLMGPT4o      = "openai/gpt-4o"
 	AuditBaseLLMGPTOSS     = "gpt-oss:20b"
+	AuditBaseLLMGPTOSSNV   = "openai/gpt-oss-20b"
 
 	AUDIT_OP_UNKNOWN            = 0
 	AUDIT_OP_TERMINATE_PROCESS  = 1

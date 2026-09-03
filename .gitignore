@@ -10,3 +10,11 @@ tests/scripts/run_results_sandbox/
 tests/scripts/run_results_gptoss/
 tests/scripts/*_audit_config.json
 tests/scripts/cmp_results/
+tests/scripts/t4_config.json
+tests/scripts/t4_demo/
+tests/scripts/t4_nodebug/
+tests/scripts/t4_nodebug_config.json
+tests/scripts/t4_nvidia_config.json
+tests/scripts/t4_nvidia_gptoss/
+tests/scripts/nvgptoss_audit_config.json
+tests/scripts/cmp_results/sample_nvidia_gptoss/

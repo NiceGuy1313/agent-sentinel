@@ -102,7 +102,6 @@ static __always_inline int process_in_scope() {
 }
 
 //------------- interesting tgids map -----------
-
 struct {
   __uint(type, BPF_MAP_TYPE_LRU_HASH);
   __uint(max_entries, 16 * 1024);
