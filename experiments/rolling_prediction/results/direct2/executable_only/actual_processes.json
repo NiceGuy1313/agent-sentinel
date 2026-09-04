@@ -1,0 +1,51 @@
+[
+  {
+    "sequence": 1,
+    "timestamp": "2026-09-03T15:49:45Z",
+    "pid": 238,
+    "parent_pid": 216,
+    "executable": "/usr/bin/dash",
+    "arguments": [
+      "/bin/sh",
+      "-c",
+      "cat > /tmp/output.txt"
+    ],
+    "syscall": 59
+  },
+  {
+    "sequence": 2,
+    "timestamp": "2026-09-03T15:49:54Z",
+    "pid": 242,
+    "parent_pid": 238,
+    "executable": "/usr/bin/cat",
+    "arguments": [
+      "cat"
+    ],
+    "syscall": 59
+  },
+  {
+    "sequence": 3,
+    "timestamp": "2026-09-03T15:50:06Z",
+    "pid": 246,
+    "parent_pid": 216,
+    "executable": "/usr/bin/dash",
+    "arguments": [
+      "/bin/sh",
+      "-c",
+      "cat /tmp/output.txt"
+    ],
+    "syscall": 59
+  },
+  {
+    "sequence": 4,
+    "timestamp": "2026-09-03T15:50:10Z",
+    "pid": 248,
+    "parent_pid": 246,
+    "executable": "/usr/bin/cat",
+    "arguments": [
+      "cat",
+      "/tmp/output.txt"
+    ],
+    "syscall": 59
+  }
+]

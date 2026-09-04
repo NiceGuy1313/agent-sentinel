@@ -1,0 +1,90 @@
+[
+  {
+    "task": "direct1",
+    "matching_policy": "executable_only",
+    "actual_stop_process_exec_count": 18,
+    "initial_prediction_queries": 1,
+    "re_prediction_queries": 10,
+    "total_prediction_llm_queries": 11,
+    "prediction_matched_events": 17,
+    "fallback_events": 1,
+    "query_reduction_relative_to_stop_count": 0.38888888888888884
+  },
+  {
+    "task": "direct1",
+    "matching_policy": "executable_args",
+    "actual_stop_process_exec_count": 18,
+    "initial_prediction_queries": 1,
+    "re_prediction_queries": 18,
+    "total_prediction_llm_queries": 19,
+    "prediction_matched_events": 12,
+    "fallback_events": 6,
+    "query_reduction_relative_to_stop_count": -0.05555555555555558
+  },
+  {
+    "task": "direct2",
+    "matching_policy": "executable_only",
+    "actual_stop_process_exec_count": 4,
+    "initial_prediction_queries": 1,
+    "re_prediction_queries": 2,
+    "total_prediction_llm_queries": 3,
+    "prediction_matched_events": 4,
+    "fallback_events": 0,
+    "query_reduction_relative_to_stop_count": 0.25
+  },
+  {
+    "task": "direct2",
+    "matching_policy": "executable_args",
+    "actual_stop_process_exec_count": 4,
+    "initial_prediction_queries": 1,
+    "re_prediction_queries": 2,
+    "total_prediction_llm_queries": 3,
+    "prediction_matched_events": 3,
+    "fallback_events": 1,
+    "query_reduction_relative_to_stop_count": 0.25
+  },
+  {
+    "task": "direct3",
+    "matching_policy": "executable_only",
+    "actual_stop_process_exec_count": 11,
+    "initial_prediction_queries": 1,
+    "re_prediction_queries": 5,
+    "total_prediction_llm_queries": 6,
+    "prediction_matched_events": 11,
+    "fallback_events": 0,
+    "query_reduction_relative_to_stop_count": 0.4545454545454546
+  },
+  {
+    "task": "direct3",
+    "matching_policy": "executable_args",
+    "actual_stop_process_exec_count": 11,
+    "initial_prediction_queries": 1,
+    "re_prediction_queries": 9,
+    "total_prediction_llm_queries": 10,
+    "prediction_matched_events": 10,
+    "fallback_events": 1,
+    "query_reduction_relative_to_stop_count": 0.09090909090909094
+  },
+  {
+    "task": "direct4",
+    "matching_policy": "executable_only",
+    "actual_stop_process_exec_count": 7,
+    "initial_prediction_queries": 1,
+    "re_prediction_queries": 5,
+    "total_prediction_llm_queries": 6,
+    "prediction_matched_events": 7,
+    "fallback_events": 0,
+    "query_reduction_relative_to_stop_count": 0.1428571428571429
+  },
+  {
+    "task": "direct4",
+    "matching_policy": "executable_args",
+    "actual_stop_process_exec_count": 7,
+    "initial_prediction_queries": 1,
+    "re_prediction_queries": 7,
+    "total_prediction_llm_queries": 8,
+    "prediction_matched_events": 6,
+    "fallback_events": 1,
+    "query_reduction_relative_to_stop_count": -0.1428571428571428
+  }
+]

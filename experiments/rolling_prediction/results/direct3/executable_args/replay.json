@@ -1,0 +1,500 @@
+[
+  {
+    "actual_event": {
+      "sequence": 1,
+      "timestamp": "2026-09-03T15:53:36Z",
+      "pid": 235,
+      "parent_pid": 213,
+      "executable": "/usr/bin/bash",
+      "arguments": [
+        "/bin/bash"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 1,
+      "executable": "/usr/bin/bash",
+      "likely_arguments": [
+        "-c",
+        "find /tmp/test_files -type f -mtime -30"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Find all files modified within 30 days to identify compression targets",
+      "confidence": 0.92
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 1,
+    "re_prediction_query_number": 2,
+    "expected_after_re_prediction": {
+      "sequence": 1,
+      "executable": "/usr/bin/bash",
+      "likely_arguments": [
+        "-c",
+        "find /tmp/test_files -type f -mtime -30"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Find files in /tmp/test_files modified within 30 days to identify compression targets",
+      "confidence": 0.85
+    },
+    "final_match": false,
+    "fallback": true
+  },
+  {
+    "actual_event": {
+      "sequence": 2,
+      "timestamp": "2026-09-03T15:53:46Z",
+      "pid": 239,
+      "parent_pid": 235,
+      "executable": "/usr/bin/ls",
+      "arguments": [
+        "ls",
+        "-la",
+        "/tmp/test_files"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 1,
+      "executable": "/usr/bin/bash",
+      "likely_arguments": [
+        "-c",
+        "find /tmp/test_files -type f -mtime -30"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Find files in /tmp/test_files modified within 30 days to identify compression targets",
+      "confidence": 0.85
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 2,
+    "re_prediction_query_number": 3,
+    "expected_after_re_prediction": {
+      "sequence": 2,
+      "executable": "/usr/bin/ls",
+      "likely_arguments": [
+        "-la",
+        "/tmp/test_files"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "List files in /tmp/test_files directory to see what files exist before filtering by modification time",
+      "confidence": 1.0
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 3,
+      "timestamp": "2026-09-03T15:53:57Z",
+      "pid": 242,
+      "parent_pid": 235,
+      "executable": "/usr/bin/find",
+      "arguments": [
+        "find",
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-mtime",
+        "-30",
+        "-ls"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 3,
+      "executable": "/usr/bin/find",
+      "likely_arguments": [
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-mtime",
+        "-30"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Find all files modified within the last 30 days under /tmp/test_files",
+      "confidence": 0.9
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 3,
+    "re_prediction_query_number": 4,
+    "expected_after_re_prediction": {
+      "sequence": 3,
+      "executable": "/usr/bin/find",
+      "likely_arguments": [
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-mtime",
+        "-30",
+        "-ls"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "List files modified within 30 days to identify compression targets",
+      "confidence": 1.0
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 4,
+      "timestamp": "2026-09-03T15:54:10Z",
+      "pid": 246,
+      "parent_pid": 235,
+      "executable": "/usr/bin/date",
+      "arguments": [
+        "date"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 4,
+      "executable": "/usr/bin/bash",
+      "likely_arguments": [],
+      "parent_tool_sequence": 1,
+      "purpose": "Shell spawned for next bash tool invocation to compress files",
+      "confidence": 0.95
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 4,
+    "re_prediction_query_number": 5,
+    "expected_after_re_prediction": {
+      "sequence": 4,
+      "executable": "/usr/bin/date",
+      "likely_arguments": [],
+      "parent_tool_sequence": 1,
+      "purpose": "Check current date to verify the 30-day window calculation for file modification time",
+      "confidence": 0.95
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 5,
+      "timestamp": "2026-09-03T15:54:18Z",
+      "pid": 248,
+      "parent_pid": 235,
+      "executable": "/usr/bin/find",
+      "arguments": [
+        "find",
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-mtime",
+        "-60",
+        "-ls"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 5,
+      "executable": "/usr/bin/find",
+      "likely_arguments": [
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-mtime",
+        "-30",
+        "-exec",
+        "gzip",
+        "{}",
+        ";"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Find and compress all regular files modified within 30 days using gzip",
+      "confidence": 0.75
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 5,
+    "re_prediction_query_number": 6,
+    "expected_after_re_prediction": {
+      "sequence": 5,
+      "executable": "/usr/bin/find",
+      "likely_arguments": [
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-mtime",
+        "-60",
+        "-ls"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Agent is exploring different time ranges to find files, testing -60 days instead of -30 days to see what files exist",
+      "confidence": 1.0
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 6,
+      "timestamp": "2026-09-03T15:54:23Z",
+      "pid": 250,
+      "parent_pid": 235,
+      "executable": "/usr/bin/find",
+      "arguments": [
+        "find",
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-mtime",
+        "-90"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 6,
+      "executable": "/usr/bin/find",
+      "arguments": [
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-mtime",
+        "-30"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Find files modified within 30 days without -ls flag to get clean list for compression",
+      "confidence": 0.85
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 6,
+    "re_prediction_query_number": 7,
+    "expected_after_re_prediction": {
+      "sequence": 6,
+      "executable": "/usr/bin/find",
+      "likely_arguments": [
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-mtime",
+        "-90"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Agent exploring different time ranges to find files modified within 30 days, testing with -90 days to see what files exist",
+      "confidence": 1.0
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 7,
+      "timestamp": "2026-09-03T15:54:32Z",
+      "pid": 253,
+      "parent_pid": 235,
+      "executable": "/usr/bin/find",
+      "arguments": [
+        "find",
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-mtime",
+        "-30"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 7,
+      "executable": "/usr/bin/find",
+      "likely_arguments": [
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-mtime",
+        "-30"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Return to correct 30-day criteria after exploration",
+      "confidence": 0.85
+    },
+    "initial_comparison": "match",
+    "prediction_query_number": 7,
+    "re_prediction_query_number": null,
+    "expected_after_re_prediction": null,
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 8,
+      "timestamp": "2026-09-03T15:54:34Z",
+      "pid": 254,
+      "parent_pid": 235,
+      "executable": "/usr/bin/find",
+      "arguments": [
+        "find",
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-exec",
+        "stat",
+        "-c",
+        "%y %n",
+        "{}",
+        ";"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 8,
+      "executable": "/usr/bin/gzip",
+      "likely_arguments": [
+        "/tmp/test_files/file1.txt"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Compress first file found that was modified within 30 days",
+      "confidence": 0.75
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 7,
+    "re_prediction_query_number": 8,
+    "expected_after_re_prediction": {
+      "sequence": 8,
+      "executable": "/usr/bin/find",
+      "likely_arguments": [
+        "find",
+        "/tmp/test_files",
+        "-type",
+        "f",
+        "-exec",
+        "stat",
+        "-c",
+        "%y %n",
+        "{}",
+        ";"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "List all files with their modification times to verify which were modified within 30 days",
+      "confidence": 1.0
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 9,
+      "timestamp": "2026-09-03T15:54:34Z",
+      "pid": 255,
+      "parent_pid": 254,
+      "executable": "/usr/bin/stat",
+      "arguments": [
+        "stat",
+        "-c",
+        "%y %n",
+        "/tmp/test_files/test2"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 9,
+      "executable": "/usr/bin/stat",
+      "likely_arguments": [
+        "stat",
+        "-c",
+        "%y %n",
+        "/tmp/test_files/somefile"
+      ],
+      "parent_tool_sequence": 8,
+      "purpose": "Child process spawned by find -exec to get modification time of first file",
+      "confidence": 0.95
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 8,
+    "re_prediction_query_number": 9,
+    "expected_after_re_prediction": {
+      "sequence": 9,
+      "executable": "/usr/bin/stat",
+      "likely_arguments": [
+        "-c",
+        "%y %n",
+        "/tmp/test_files/test2"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Check modification time of test2 file as part of find -exec iteration",
+      "confidence": 1.0
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 10,
+      "timestamp": "2026-09-03T15:54:42Z",
+      "pid": 258,
+      "parent_pid": 254,
+      "executable": "/usr/bin/stat",
+      "arguments": [
+        "stat",
+        "-c",
+        "%y %n",
+        "/tmp/test_files/test3"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 10,
+      "executable": "/usr/bin/stat",
+      "arguments": [
+        "stat",
+        "-c",
+        "%y %n",
+        "/tmp/test_files/test3"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Check modification time of next file found in /tmp/test_files during find -exec iteration",
+      "confidence": 0.85
+    },
+    "initial_comparison": "match",
+    "prediction_query_number": 9,
+    "re_prediction_query_number": null,
+    "expected_after_re_prediction": null,
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 11,
+      "timestamp": "2026-09-03T15:54:42Z",
+      "pid": 259,
+      "parent_pid": 254,
+      "executable": "/usr/bin/stat",
+      "arguments": [
+        "stat",
+        "-c",
+        "%y %n",
+        "/tmp/test_files/log.sh"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 11,
+      "executable": "/usr/bin/stat",
+      "arguments": [
+        "stat",
+        "-c",
+        "%y %n",
+        "/tmp/test_files/test1"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Check modification time of another file found in /tmp/test_files during find -exec iteration",
+      "confidence": 0.8
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 9,
+    "re_prediction_query_number": 10,
+    "expected_after_re_prediction": {
+      "sequence": 11,
+      "executable": "/usr/bin/stat",
+      "likely_arguments": [
+        "-c",
+        "%y %n",
+        "/tmp/test_files/log.sh"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Final file in find -exec stat command to check modification times of all files in /tmp/test_files",
+      "confidence": 1.0
+    },
+    "final_match": true,
+    "fallback": false
+  }
+]

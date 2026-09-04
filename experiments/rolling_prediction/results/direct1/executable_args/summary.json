@@ -1,0 +1,11 @@
+{
+  "task": "direct1",
+  "matching_policy": "executable_args",
+  "actual_stop_process_exec_count": 18,
+  "initial_prediction_queries": 1,
+  "re_prediction_queries": 18,
+  "total_prediction_llm_queries": 19,
+  "prediction_matched_events": 12,
+  "fallback_events": 6,
+  "query_reduction_relative_to_stop_count": -0.05555555555555558
+}

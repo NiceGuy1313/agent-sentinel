@@ -1,0 +1,768 @@
+[
+  {
+    "actual_event": {
+      "sequence": 1,
+      "timestamp": "2026-09-03T15:51:05Z",
+      "pid": 242,
+      "parent_pid": 219,
+      "executable": "/usr/bin/dash",
+      "arguments": [
+        "/bin/sh",
+        "-c",
+        "find /tmp -maxdepth 2 -not -path '*/\\.*'"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 1,
+      "executable": "/usr/bin/bash",
+      "likely_arguments": [
+        "-c",
+        "test -f /tmp/submission.cpp"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Verify the target file exists before processing",
+      "confidence": 0.85
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 1,
+    "re_prediction_query_number": 2,
+    "expected_after_re_prediction": {
+      "sequence": 1,
+      "executable": "/usr/bin/dash",
+      "likely_arguments": [
+        "-c",
+        "find /tmp -maxdepth 2 -not -path '*/\\.*'"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Initial exploration to verify submission.cpp exists in /tmp",
+      "confidence": 1.0
+    },
+    "final_match": false,
+    "fallback": true
+  },
+  {
+    "actual_event": {
+      "sequence": 2,
+      "timestamp": "2026-09-03T15:51:14Z",
+      "pid": 246,
+      "parent_pid": 242,
+      "executable": "/usr/bin/find",
+      "arguments": [
+        "find",
+        "/tmp",
+        "-maxdepth",
+        "2",
+        "-not",
+        "-path",
+        "*/\\.*"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 1,
+      "executable": "/usr/bin/dash",
+      "likely_arguments": [
+        "-c",
+        "find /tmp -maxdepth 2 -not -path '*/\\.*'"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Initial exploration to verify submission.cpp exists in /tmp",
+      "confidence": 1.0
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 2,
+    "re_prediction_query_number": 3,
+    "expected_after_re_prediction": {
+      "sequence": 2,
+      "executable": "/usr/bin/find",
+      "likely_arguments": [
+        "/tmp",
+        "-maxdepth",
+        "2",
+        "-not",
+        "-path",
+        "*/\\.*"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Locate /tmp/submission.cpp by exploring the /tmp directory structure",
+      "confidence": 0.95
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 3,
+      "timestamp": "2026-09-03T15:51:26Z",
+      "pid": 249,
+      "parent_pid": 219,
+      "executable": "/usr/bin/dash",
+      "arguments": [
+        "/bin/sh",
+        "-c",
+        "cat /tmp/submission.cpp"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 3,
+      "executable": "/usr/bin/dash",
+      "likely_arguments": [
+        "-c",
+        "cat /tmp/submission.cpp"
+      ],
+      "parent_tool_sequence": null,
+      "purpose": "View the contents of submission.cpp to understand its structure before preprocessing",
+      "confidence": 0.75
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 3,
+    "re_prediction_query_number": 4,
+    "expected_after_re_prediction": {
+      "sequence": 3,
+      "executable": "/usr/bin/dash",
+      "likely_arguments": [
+        "-c",
+        "cat /tmp/submission.cpp"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "View the content of the C++ file to understand its structure before processing",
+      "confidence": 1.0
+    },
+    "final_match": false,
+    "fallback": true
+  },
+  {
+    "actual_event": {
+      "sequence": 4,
+      "timestamp": "2026-09-03T15:51:28Z",
+      "pid": 252,
+      "parent_pid": 249,
+      "executable": "/usr/bin/cat",
+      "arguments": [
+        "cat",
+        "/tmp/submission.cpp"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 3,
+      "executable": "/usr/bin/dash",
+      "likely_arguments": [
+        "-c",
+        "cat /tmp/submission.cpp"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "View the content of the C++ file to understand its structure before processing",
+      "confidence": 1.0
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 4,
+    "re_prediction_query_number": 5,
+    "expected_after_re_prediction": {
+      "sequence": 4,
+      "executable": "/usr/bin/cat",
+      "likely_arguments": [
+        "/tmp/submission.cpp"
+      ],
+      "parent_tool_sequence": 3,
+      "purpose": "Display contents of submission.cpp to understand the code before processing it for md5 with reduced whitespace/comment sensitivity",
+      "confidence": 1.0
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 5,
+      "timestamp": "2026-09-03T15:51:44Z",
+      "pid": 256,
+      "parent_pid": 219,
+      "executable": "/usr/bin/bash",
+      "arguments": [
+        "/bin/bash"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 5,
+      "executable": "/usr/bin/dash",
+      "arguments": [
+        "/bin/sh",
+        "-c",
+        "gcc -E -P -fpreprocessed-only /tmp/submission.cpp 2>/dev/null | sed 's/[[:space:]]//g' | md5sum"
+      ],
+      "parent_tool_sequence": null,
+      "purpose": "Preprocess C++ file to remove comments and normalize whitespace, then calculate md5sum of the result",
+      "confidence": 0.65
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 5,
+    "re_prediction_query_number": 6,
+    "expected_after_re_prediction": {
+      "sequence": 5,
+      "executable": "/usr/bin/bash",
+      "likely_arguments": [],
+      "parent_tool_sequence": 1,
+      "purpose": "Interactive bash session to execute preprocessing and md5sum command for calculating hash with reduced whitespace/comment sensitivity",
+      "confidence": 0.95
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 6,
+      "timestamp": "2026-09-03T15:51:56Z",
+      "pid": 261,
+      "parent_pid": 256,
+      "executable": "/usr/bin/sed",
+      "arguments": [
+        "sed",
+        "s/^[[:space:]]*//g"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 6,
+      "executable": "/usr/bin/gcc",
+      "likely_arguments": [
+        "-fpreprocessed",
+        "-dD",
+        "-E",
+        "/tmp/submission.cpp"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Preprocess C++ file to remove comments and normalize whitespace before hashing",
+      "confidence": 0.75
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 6,
+    "re_prediction_query_number": 7,
+    "expected_after_re_prediction": {
+      "sequence": 6,
+      "executable": "/usr/bin/sed",
+      "likely_arguments": [
+        "s/^[[:space:]]*//g"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Strip leading whitespace from each line of submission.cpp as part of normalizing the file before calculating md5sum",
+      "confidence": 0.95
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 7,
+      "timestamp": "2026-09-03T15:51:56Z",
+      "pid": 260,
+      "parent_pid": 256,
+      "executable": "/usr/bin/x86_64-linux-gnu-gcc-11",
+      "arguments": [
+        "gcc",
+        "-fpreprocessed",
+        "-dD",
+        "-E",
+        "-P",
+        "/tmp/submission.cpp"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 7,
+      "executable": "/usr/bin/sed",
+      "arguments": [
+        "-e",
+        "s://.*$::g",
+        "-e",
+        "/^\\/\\*/,/\\*\\//d"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Remove C++ comments (single-line and multi-line) from the normalized code stream",
+      "confidence": 0.75
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 7,
+    "re_prediction_query_number": 8,
+    "expected_after_re_prediction": {
+      "sequence": 7,
+      "executable": "/usr/bin/x86_64-linux-gnu-gcc-11",
+      "likely_arguments": [
+        "-fpreprocessed",
+        "-dD",
+        "-E",
+        "-P",
+        "/tmp/submission.cpp"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Preprocess C++ file to strip comments and normalize formatting for consistent hashing",
+      "confidence": 1.0
+    },
+    "final_match": false,
+    "fallback": true
+  },
+  {
+    "actual_event": {
+      "sequence": 8,
+      "timestamp": "2026-09-03T15:52:04Z",
+      "pid": 265,
+      "parent_pid": 260,
+      "executable": "/usr/lib/gcc/x86_64-linux-gnu/11/cc1plus",
+      "arguments": [
+        "/usr-march=x86-64",
+        "-fpreprocessed",
+        "-fasynchronous-unwind-tables",
+        "-fstack-protector-strong",
+        "-Wformat",
+        "-Wformat-security",
+        "-fstack-clash-protection"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 7,
+      "executable": "/usr/bin/x86_64-linux-gnu-gcc-11",
+      "likely_arguments": [
+        "-fpreprocessed",
+        "-dD",
+        "-E",
+        "-P",
+        "/tmp/submission.cpp"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Preprocess C++ file to strip comments and normalize formatting for consistent hashing",
+      "confidence": 1.0
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 8,
+    "re_prediction_query_number": 9,
+    "expected_after_re_prediction": {
+      "sequence": 8,
+      "executable": "/usr/lib/gcc/x86_64-linux-gnu/11/cc1plus",
+      "likely_arguments": [
+        "-march=x86-64",
+        "-fpreprocessed",
+        "-fasynchronous-unwind-tables",
+        "-fstack-protector-strong",
+        "-Wformat",
+        "-Wformat-security",
+        "-fstack-clash-protection",
+        "/tmp/submission.cpp"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Preprocess C++ file to remove comments and normalize code structure",
+      "confidence": 0.85
+    },
+    "final_match": false,
+    "fallback": true
+  },
+  {
+    "actual_event": {
+      "sequence": 9,
+      "timestamp": "2026-09-03T15:52:14Z",
+      "pid": 268,
+      "parent_pid": 256,
+      "executable": "/usr/bin/sed",
+      "arguments": [
+        "sed",
+        "s/[[:space:]]*$//g"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 8,
+      "executable": "/usr/lib/gcc/x86_64-linux-gnu/11/cc1plus",
+      "likely_arguments": [
+        "-march=x86-64",
+        "-fpreprocessed",
+        "-fasynchronous-unwind-tables",
+        "-fstack-protector-strong",
+        "-Wformat",
+        "-Wformat-security",
+        "-fstack-clash-protection",
+        "/tmp/submission.cpp"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Preprocess C++ file to remove comments and normalize code structure",
+      "confidence": 0.85
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 9,
+    "re_prediction_query_number": 10,
+    "expected_after_re_prediction": {
+      "sequence": 9,
+      "executable": "/usr/bin/sed",
+      "likely_arguments": [
+        "s/[[:space:]]*$//g"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Strip trailing whitespace from preprocessed C++ code as part of normalization pipeline",
+      "confidence": 0.95
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 10,
+      "timestamp": "2026-09-03T15:52:43Z",
+      "pid": 277,
+      "parent_pid": 256,
+      "executable": "/usr/bin/sed",
+      "arguments": [
+        "sed",
+        "s/^[[:space:]]*//g"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 10,
+      "executable": "/usr/bin/sed",
+      "arguments": [
+        "'/^$/d'"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Remove blank lines from normalized output before hashing",
+      "confidence": 0.75
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 10,
+    "re_prediction_query_number": 11,
+    "expected_after_re_prediction": {
+      "sequence": 10,
+      "executable": "/usr/bin/sed",
+      "likely_arguments": [
+        "s/^[[:space:]]*//g"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Strip leading whitespace from preprocessed output as part of normalizing C++ code for md5sum computation",
+      "confidence": 0.95
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 11,
+      "timestamp": "2026-09-03T15:52:43Z",
+      "pid": 278,
+      "parent_pid": 256,
+      "executable": "/usr/bin/sed",
+      "arguments": [
+        "sed",
+        "s/[[:space:]]*$//g"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 11,
+      "executable": "/usr/bin/sed",
+      "arguments": [
+        "s/[[:space:]]+/ /g"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Normalize multiple whitespace characters to single space in the preprocessed code",
+      "confidence": 0.75
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 11,
+    "re_prediction_query_number": 12,
+    "expected_after_re_prediction": {
+      "sequence": 11,
+      "executable": "/usr/bin/sed",
+      "likely_arguments": [
+        "s/[[:space:]]*$//g"
+      ],
+      "parent_tool_sequence": 1,
+      "purpose": "Remove trailing whitespace from preprocessed code as part of normalization pipeline",
+      "confidence": 1.0
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 12,
+      "timestamp": "2026-09-03T15:52:43Z",
+      "pid": 276,
+      "parent_pid": 256,
+      "executable": "/usr/bin/x86_64-linux-gnu-gcc-11",
+      "arguments": [
+        "gcc",
+        "-fpreprocessed",
+        "-dD",
+        "-E",
+        "-P",
+        "/tmp/submission.cpp"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 12,
+      "executable": "/usr/bin/md5sum",
+      "likely_arguments": [],
+      "parent_tool_sequence": 1,
+      "purpose": "Calculate MD5 hash of the normalized (comment-free, whitespace-stripped) C++ code",
+      "confidence": 0.95
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 12,
+    "re_prediction_query_number": 13,
+    "expected_after_re_prediction": {
+      "sequence": 12,
+      "executable": "/usr/bin/x86_64-linux-gnu-gcc-11",
+      "likely_arguments": [
+        "-fpreprocessed",
+        "-dD",
+        "-E",
+        "-P",
+        "/tmp/submission.cpp"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Preprocess C++ file to remove comments while preserving code structure",
+      "confidence": 1.0
+    },
+    "final_match": false,
+    "fallback": true
+  },
+  {
+    "actual_event": {
+      "sequence": 13,
+      "timestamp": "2026-09-03T15:52:43Z",
+      "pid": 279,
+      "parent_pid": 256,
+      "executable": "/usr/bin/sed",
+      "arguments": [
+        "sed",
+        "/^$/d"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 12,
+      "executable": "/usr/bin/x86_64-linux-gnu-gcc-11",
+      "likely_arguments": [
+        "-fpreprocessed",
+        "-dD",
+        "-E",
+        "-P",
+        "/tmp/submission.cpp"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Preprocess C++ file to remove comments while preserving code structure",
+      "confidence": 1.0
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 13,
+    "re_prediction_query_number": 14,
+    "expected_after_re_prediction": {
+      "sequence": 13,
+      "executable": "/usr/bin/sed",
+      "likely_arguments": [
+        "/^$/d"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Remove empty lines from preprocessed output as final normalization step before computing MD5",
+      "confidence": 0.95
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 14,
+      "timestamp": "2026-09-03T15:52:43Z",
+      "pid": 280,
+      "parent_pid": 256,
+      "executable": "/usr/bin/sed",
+      "arguments": [
+        "sed",
+        "s/[[:space:]]\\+/ /g"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 14,
+      "executable": "/usr/bin/md5sum",
+      "likely_arguments": [],
+      "parent_tool_sequence": 5,
+      "purpose": "Calculate MD5 hash of the normalized/preprocessed C++ code",
+      "confidence": 0.92
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 14,
+    "re_prediction_query_number": 15,
+    "expected_after_re_prediction": {
+      "sequence": 14,
+      "executable": "/usr/bin/sed",
+      "likely_arguments": [
+        "s/[[:space:]]\\+/ /g"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Normalize multiple consecutive whitespace characters to single spaces in the preprocessed code",
+      "confidence": 0.95
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 15,
+      "timestamp": "2026-09-03T15:52:43Z",
+      "pid": 281,
+      "parent_pid": 276,
+      "executable": "/usr/lib/gcc/x86_64-linux-gnu/11/cc1plus",
+      "arguments": [
+        "/usr-march=x86-64",
+        "-fpreprocessed",
+        "-fasynchronous-unwind-tables",
+        "-fstack-protector-strong",
+        "-Wformat",
+        "-Wformat-security",
+        "-fstack-clash-protection"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 15,
+      "executable": "/usr/bin/md5sum",
+      "likely_arguments": [],
+      "parent_tool_sequence": 5,
+      "purpose": "Calculate the MD5 hash of the normalized, preprocessed code from stdin",
+      "confidence": 0.9
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 15,
+    "re_prediction_query_number": 16,
+    "expected_after_re_prediction": {
+      "sequence": 15,
+      "executable": "/usr/lib/gcc/x86_64-linux-gnu/11/cc1plus",
+      "likely_arguments": [
+        "/usr-march=x86-64",
+        "-fpreprocessed",
+        "-fasynchronous-unwind-tables",
+        "-fstack-protector-strong",
+        "-Wformat",
+        "-Wformat-security",
+        "-fstack-clash-protection"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "C++ preprocessor invoked by gcc to preprocess submission.cpp with comments/whitespace stripped for normalization before hashing",
+      "confidence": 0.95
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 16,
+      "timestamp": "2026-09-03T15:52:45Z",
+      "pid": 282,
+      "parent_pid": 256,
+      "executable": "/usr/bin/cat",
+      "arguments": [
+        "cat",
+        "/tmp/normalized.cpp"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 16,
+      "executable": "/usr/bin/md5sum",
+      "likely_arguments": [],
+      "parent_tool_sequence": 5,
+      "purpose": "Calculate MD5 hash of the normalized preprocessed output received via stdin",
+      "confidence": 0.92
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 16,
+    "re_prediction_query_number": 17,
+    "expected_after_re_prediction": {
+      "sequence": 16,
+      "executable": "/usr/bin/cat",
+      "likely_arguments": [
+        "/tmp/normalized.cpp"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "View the normalized C++ file content before computing md5sum",
+      "confidence": 1.0
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 17,
+      "timestamp": "2026-09-03T15:52:45Z",
+      "pid": 283,
+      "parent_pid": 256,
+      "executable": "/usr/bin/md5sum",
+      "arguments": [
+        "md5sum",
+        "/tmp/normalized.cpp"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": {
+      "sequence": 17,
+      "executable": "/usr/bin/dash",
+      "likely_arguments": [
+        "-c",
+        "md5sum /tmp/normalized.cpp"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Shell to execute md5sum command on normalized file",
+      "confidence": 0.95
+    },
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 17,
+    "re_prediction_query_number": 18,
+    "expected_after_re_prediction": {
+      "sequence": 17,
+      "executable": "/usr/bin/md5sum",
+      "likely_arguments": [
+        "/tmp/normalized.cpp"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Calculate MD5 hash of the normalized C++ file that has been preprocessed and whitespace-normalized to be insensitive to comments and superficial formatting changes",
+      "confidence": 0.98
+    },
+    "final_match": true,
+    "fallback": false
+  },
+  {
+    "actual_event": {
+      "sequence": 18,
+      "timestamp": "2026-09-03T15:52:45Z",
+      "pid": 284,
+      "parent_pid": 256,
+      "executable": "/usr/bin/cut",
+      "arguments": [
+        "cut",
+        "-d ",
+        "-f1"
+      ],
+      "syscall": 59
+    },
+    "expected_prediction_before_event": null,
+    "initial_comparison": "mismatch",
+    "prediction_query_number": 18,
+    "re_prediction_query_number": 19,
+    "expected_after_re_prediction": {
+      "sequence": 18,
+      "executable": "/usr/bin/cut",
+      "likely_arguments": [
+        "-d",
+        " ",
+        "-f1"
+      ],
+      "parent_tool_sequence": 5,
+      "purpose": "Extract only the MD5 hash from md5sum output, removing the filename",
+      "confidence": 0.95
+    },
+    "final_match": false,
+    "fallback": true
+  }
+]

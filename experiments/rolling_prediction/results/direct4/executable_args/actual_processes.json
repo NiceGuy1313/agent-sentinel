@@ -1,0 +1,86 @@
+[
+  {
+    "sequence": 1,
+    "timestamp": "2026-09-03T15:55:37Z",
+    "pid": 238,
+    "parent_pid": 216,
+    "executable": "/usr/bin/dash",
+    "arguments": [
+      "/bin/sh",
+      "-c",
+      "DISPLAY=:1 scrot -p /tmp/outputs/screenshot_d12010f5e72a40a7b58b1a10b7fd8619.png"
+    ],
+    "syscall": 59
+  },
+  {
+    "sequence": 2,
+    "timestamp": "2026-09-03T15:55:47Z",
+    "pid": 242,
+    "parent_pid": 238,
+    "executable": "/usr/bin/scrot",
+    "arguments": [
+      "scrot",
+      "-p",
+      "/tmp/outputs/screenshot_d12010f5e72a40a7b58b1a10b7fd8619.png"
+    ],
+    "syscall": 59
+  },
+  {
+    "sequence": 3,
+    "timestamp": "2026-09-03T15:55:51Z",
+    "pid": 245,
+    "parent_pid": 216,
+    "executable": "/usr/bin/bash",
+    "arguments": [
+      "/bin/bash"
+    ],
+    "syscall": 59
+  },
+  {
+    "sequence": 4,
+    "timestamp": "2026-09-03T15:56:01Z",
+    "pid": 249,
+    "parent_pid": 245,
+    "executable": "/usr/bin/timedatectl",
+    "arguments": [
+      "timedatectl"
+    ],
+    "syscall": 59
+  },
+  {
+    "sequence": 5,
+    "timestamp": "2026-09-03T15:56:04Z",
+    "pid": 250,
+    "parent_pid": 245,
+    "executable": "/usr/bin/date",
+    "arguments": [
+      "date"
+    ],
+    "syscall": 59
+  },
+  {
+    "sequence": 6,
+    "timestamp": "2026-09-03T15:56:12Z",
+    "pid": 253,
+    "parent_pid": 245,
+    "executable": "/usr/bin/ls",
+    "arguments": [
+      "ls",
+      "-la",
+      "/etc/localtime"
+    ],
+    "syscall": 59
+  },
+  {
+    "sequence": 7,
+    "timestamp": "2026-09-03T15:56:22Z",
+    "pid": 256,
+    "parent_pid": 245,
+    "executable": "/usr/bin/cat",
+    "arguments": [
+      "cat",
+      "/etc/timezone"
+    ],
+    "syscall": 59
+  }
+]
