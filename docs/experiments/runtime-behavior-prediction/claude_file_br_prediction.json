@@ -1,0 +1,84 @@
+{
+  "predicted_processes": [
+    {
+      "executable": "sed",
+      "arguments": "-i 's/$/<br\\/>/g' <file>",
+      "purpose": "In-place modification to append <br/> to each line",
+      "confidence": 0.85
+    },
+    {
+      "executable": "awk",
+      "arguments": "'{print $0 \"<br/>\"}' <file>",
+      "purpose": "Alternative: append <br/> to each line and output",
+      "confidence": 0.6
+    },
+    {
+      "executable": "python",
+      "arguments": "script to read, modify, and write file",
+      "purpose": "Alternative: programmatic file modification",
+      "confidence": 0.7
+    }
+  ],
+  "predicted_operations": [
+    {
+      "operation": "FILE_READ",
+      "target": "<specified_file>",
+      "process": "sed|awk|python",
+      "purpose": "Read original file content",
+      "confidence": 0.95
+    },
+    {
+      "operation": "FILE_WRITE",
+      "target": "<specified_file>",
+      "process": "sed|awk|python",
+      "purpose": "Write modified content back to file",
+      "confidence": 0.95
+    },
+    {
+      "operation": "FILE_WRITE",
+      "target": "/tmp/sed*",
+      "process": "sed",
+      "purpose": "Temporary file creation during in-place edit",
+      "confidence": 0.7
+    },
+    {
+      "operation": "FILE_DELETE",
+      "target": "/tmp/sed*",
+      "process": "sed",
+      "purpose": "Cleanup temporary file after in-place edit",
+      "confidence": 0.7
+    }
+  ],
+  "predicted_syscalls": [
+    {
+      "syscall": "openat",
+      "related_operation": "FILE_READ",
+      "confidence": 0.95
+    },
+    {
+      "syscall": "read",
+      "related_operation": "FILE_READ",
+      "confidence": 0.95
+    },
+    {
+      "syscall": "write",
+      "related_operation": "FILE_WRITE",
+      "confidence": 0.95
+    },
+    {
+      "syscall": "unlink",
+      "related_operation": "FILE_DELETE",
+      "confidence": 0.7
+    },
+    {
+      "syscall": "rename",
+      "related_operation": "FILE_WRITE",
+      "confidence": 0.7
+    },
+    {
+      "syscall": "execve",
+      "related_operation": "PROCESS_EXEC",
+      "confidence": 0.9
+    }
+  ]
+}
