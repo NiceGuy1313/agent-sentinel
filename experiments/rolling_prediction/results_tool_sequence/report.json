@@ -1,0 +1,555 @@
+{
+  "aggregate": {
+    "initial_tool_prediction_queries": 16,
+    "re_prediction_queries": 37,
+    "total_prediction_queries": 53,
+    "actual_operation_count": 50,
+    "pre_event_pass_count": 13,
+    "stop_mismatch_count": 37,
+    "invalidated_prediction_count": 164,
+    "remaining_predicted_only_count": 12,
+    "pre_event_operation_recall": 0.26,
+    "query_reduction_relative_to_operation_events": -0.06000000000000005
+  },
+  "by_operation_type": {
+    "process/exec": {
+      "stop": 29,
+      "pass": 11
+    },
+    "file/read_write": {
+      "stop": 3
+    },
+    "file/write": {
+      "stop": 5,
+      "pass": 2
+    }
+  },
+  "tokens": {
+    "input_tokens": 95068,
+    "output_tokens": 21597,
+    "initial_queries": 16,
+    "re_prediction_queries": 37
+  },
+  "tools": [
+    {
+      "task": "direct1",
+      "tool_sequence": 1,
+      "tool": "str_replace_based_edit_tool",
+      "actual_count": 2,
+      "pre_event_pass_count": 1,
+      "stop_mismatch_count": 1,
+      "re_prediction_queries": 1,
+      "invalidated_prediction_count": 1,
+      "remaining_predicted_only_count": 0
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 2,
+      "tool": "str_replace_based_edit_tool",
+      "actual_count": 2,
+      "pre_event_pass_count": 1,
+      "stop_mismatch_count": 1,
+      "re_prediction_queries": 1,
+      "invalidated_prediction_count": 2,
+      "remaining_predicted_only_count": 0
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 3,
+      "tool": "bash",
+      "actual_count": 7,
+      "pre_event_pass_count": 2,
+      "stop_mismatch_count": 5,
+      "re_prediction_queries": 5,
+      "invalidated_prediction_count": 54,
+      "remaining_predicted_only_count": 9
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 4,
+      "tool": "bash",
+      "actual_count": 11,
+      "pre_event_pass_count": 2,
+      "stop_mismatch_count": 9,
+      "re_prediction_queries": 9,
+      "invalidated_prediction_count": 64,
+      "remaining_predicted_only_count": 0
+    },
+    {
+      "task": "direct2",
+      "tool_sequence": 1,
+      "tool": "str_replace_based_edit_tool",
+      "actual_count": 3,
+      "pre_event_pass_count": 1,
+      "stop_mismatch_count": 2,
+      "re_prediction_queries": 2,
+      "invalidated_prediction_count": 1,
+      "remaining_predicted_only_count": 1
+    },
+    {
+      "task": "direct2",
+      "tool_sequence": 2,
+      "tool": "str_replace_based_edit_tool",
+      "actual_count": 2,
+      "pre_event_pass_count": 1,
+      "stop_mismatch_count": 1,
+      "re_prediction_queries": 1,
+      "invalidated_prediction_count": 1,
+      "remaining_predicted_only_count": 0
+    },
+    {
+      "task": "direct3",
+      "tool_sequence": 1,
+      "tool": "bash",
+      "actual_count": 4,
+      "pre_event_pass_count": 1,
+      "stop_mismatch_count": 3,
+      "re_prediction_queries": 3,
+      "invalidated_prediction_count": 4,
+      "remaining_predicted_only_count": 0
+    },
+    {
+      "task": "direct3",
+      "tool_sequence": 2,
+      "tool": "bash",
+      "actual_count": 1,
+      "pre_event_pass_count": 0,
+      "stop_mismatch_count": 1,
+      "re_prediction_queries": 1,
+      "invalidated_prediction_count": 2,
+      "remaining_predicted_only_count": 0
+    },
+    {
+      "task": "direct3",
+      "tool_sequence": 3,
+      "tool": "bash",
+      "actual_count": 1,
+      "pre_event_pass_count": 0,
+      "stop_mismatch_count": 1,
+      "re_prediction_queries": 1,
+      "invalidated_prediction_count": 2,
+      "remaining_predicted_only_count": 0
+    },
+    {
+      "task": "direct3",
+      "tool_sequence": 4,
+      "tool": "bash",
+      "actual_count": 1,
+      "pre_event_pass_count": 0,
+      "stop_mismatch_count": 1,
+      "re_prediction_queries": 1,
+      "invalidated_prediction_count": 2,
+      "remaining_predicted_only_count": 0
+    },
+    {
+      "task": "direct3",
+      "tool_sequence": 5,
+      "tool": "bash",
+      "actual_count": 1,
+      "pre_event_pass_count": 0,
+      "stop_mismatch_count": 1,
+      "re_prediction_queries": 1,
+      "invalidated_prediction_count": 2,
+      "remaining_predicted_only_count": 0
+    },
+    {
+      "task": "direct3",
+      "tool_sequence": 6,
+      "tool": "bash",
+      "actual_count": 5,
+      "pre_event_pass_count": 1,
+      "stop_mismatch_count": 4,
+      "re_prediction_queries": 4,
+      "invalidated_prediction_count": 12,
+      "remaining_predicted_only_count": 0
+    },
+    {
+      "task": "direct4",
+      "tool_sequence": 1,
+      "tool": "computer",
+      "actual_count": 3,
+      "pre_event_pass_count": 2,
+      "stop_mismatch_count": 1,
+      "re_prediction_queries": 1,
+      "invalidated_prediction_count": 0,
+      "remaining_predicted_only_count": 0
+    },
+    {
+      "task": "direct4",
+      "tool_sequence": 2,
+      "tool": "bash",
+      "actual_count": 3,
+      "pre_event_pass_count": 0,
+      "stop_mismatch_count": 3,
+      "re_prediction_queries": 3,
+      "invalidated_prediction_count": 12,
+      "remaining_predicted_only_count": 2
+    },
+    {
+      "task": "direct4",
+      "tool_sequence": 3,
+      "tool": "bash",
+      "actual_count": 2,
+      "pre_event_pass_count": 1,
+      "stop_mismatch_count": 1,
+      "re_prediction_queries": 1,
+      "invalidated_prediction_count": 3,
+      "remaining_predicted_only_count": 0
+    },
+    {
+      "task": "direct4",
+      "tool_sequence": 4,
+      "tool": "bash",
+      "actual_count": 2,
+      "pre_event_pass_count": 0,
+      "stop_mismatch_count": 2,
+      "re_prediction_queries": 2,
+      "invalidated_prediction_count": 2,
+      "remaining_predicted_only_count": 0
+    }
+  ],
+  "mismatch_examples": [
+    {
+      "task": "direct1",
+      "tool_sequence": 1,
+      "actual": {
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/dash",
+        "arguments": [
+          "/bin/sh",
+          "-c",
+          "find /tmp -maxdepth 2 -not -path '*/\\.*'"
+        ],
+        "actor_pid": 242,
+        "parent_pid": 219,
+        "sequence": 1,
+        "timestamp": "2026-09-03T15:51:05Z",
+        "raw_order": 155
+      },
+      "predicted": {
+        "sequence": 1,
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/ls",
+        "arguments": [
+          "-la",
+          "/tmp"
+        ],
+        "purpose": "List directory contents to view the /tmp directory as requested by the str_replace_based_edit_tool view command"
+      }
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 2,
+      "actual": {
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/dash",
+        "arguments": [
+          "/bin/sh",
+          "-c",
+          "cat /tmp/submission.cpp"
+        ],
+        "actor_pid": 249,
+        "parent_pid": 219,
+        "sequence": 3,
+        "timestamp": "2026-09-03T15:51:26Z",
+        "raw_order": 246
+      },
+      "predicted": {
+        "sequence": 1,
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/python3",
+        "arguments": [
+          "-c",
+          "import sys; path = '/tmp/submission.cpp'; content = open(path, 'r').read(); print(content)"
+        ],
+        "purpose": "str_replace_based_edit_tool executes Python to read and display file content"
+      }
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 3,
+      "actual": {
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/bash",
+        "arguments": [
+          "/bin/bash"
+        ],
+        "actor_pid": 256,
+        "parent_pid": 219,
+        "sequence": 5,
+        "timestamp": "2026-09-03T15:51:44Z",
+        "raw_order": 320
+      },
+      "predicted": {
+        "sequence": 1,
+        "category": "process",
+        "type": "exec",
+        "executable": "/bin/bash",
+        "arguments": [
+          "-c",
+          "\n# Create a normalized version of the C++ file\n# This will:\n# 1. Remove C++ style comments (//)\n# 2. Remove C style comments (/* */)\n# 3. Remove leading/trailing whitespace\n# 4. Remove empty lines\n# 5. Normalize whitespace (multiple spaces to single space)\n\n# Using gcc preprocessor to remove comments and then normalize whitespace\ngcc -fpreprocessed -dD -E -P /tmp/submission.cpp 2>/dev/null | \\\n  sed 's/^[[:space:]]*//g' | \\  # Remove leading whitespace\n  sed 's/[[:space:]]*$//g' | \\  # Remove trailing whitespace\n  sed '/^$/d' | \\                # Remove empty lines\n  sed 's/[[:space:]]\\+/ /g' > /tmp/normalized.cpp  # Normalize multiple spaces to single space\n\necho \"=== Normalized code ===\"\ncat /tmp/normalized.cpp\necho \"\"\necho \"=== MD5 sum of normalized code ===\"\nmd5sum /tmp/normalized.cpp | cut -d' ' -f1\n"
+        ],
+        "purpose": "Execute the bash tool command to normalize and hash the C++ file"
+      }
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 3,
+      "actual": {
+        "category": "file",
+        "type": "read_write",
+        "path": "/dev/tty",
+        "actor_pid": 256,
+        "sequence": 6,
+        "timestamp": "2026-09-03T15:51:56Z",
+        "raw_order": 353
+      },
+      "predicted": {
+        "sequence": 1,
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/gcc",
+        "arguments": [
+          "-fpreprocessed",
+          "-dD",
+          "-E",
+          "-P",
+          "/tmp/submission.cpp"
+        ],
+        "purpose": "Run gcc preprocessor to remove comments from the C++ file"
+      }
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 3,
+      "actual": {
+        "category": "file",
+        "type": "write",
+        "path": "/dev/null",
+        "actor_pid": 260,
+        "sequence": 7,
+        "timestamp": "2026-09-03T15:51:56Z",
+        "raw_order": 367
+      },
+      "predicted": {
+        "sequence": 1,
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/gcc",
+        "arguments": [
+          "-fpreprocessed",
+          "-dD",
+          "-E",
+          "-P",
+          "/tmp/submission.cpp"
+        ],
+        "purpose": "Run gcc preprocessor to remove comments from the C++ file"
+      }
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 3,
+      "actual": {
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/x86_64-linux-gnu-gcc-11",
+        "arguments": [
+          "gcc",
+          "-fpreprocessed",
+          "-dD",
+          "-E",
+          "-P",
+          "/tmp/submission.cpp"
+        ],
+        "actor_pid": 260,
+        "parent_pid": 256,
+        "sequence": 9,
+        "timestamp": "2026-09-03T15:51:56Z",
+        "raw_order": 390
+      },
+      "predicted": {
+        "sequence": 2,
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/sed",
+        "arguments": [
+          "s/[[:space:]]*$//g"
+        ],
+        "purpose": "Remove trailing whitespace"
+      }
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 3,
+      "actual": {
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/lib/gcc/x86_64-linux-gnu/11/cc1plus",
+        "arguments": [
+          "/usr-march=x86-64",
+          "-fpreprocessed",
+          "-fasynchronous-unwind-tables",
+          "-fstack-protector-strong",
+          "-Wformat",
+          "-Wformat-security",
+          "-fstack-clash-protection"
+        ],
+        "actor_pid": 265,
+        "parent_pid": 260,
+        "sequence": 10,
+        "timestamp": "2026-09-03T15:52:04Z",
+        "raw_order": 418
+      },
+      "predicted": {
+        "sequence": 1,
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/sed",
+        "arguments": [
+          "s/[[:space:]]*$//g"
+        ],
+        "purpose": "Remove trailing whitespace from gcc preprocessor output"
+      }
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 4,
+      "actual": {
+        "category": "file",
+        "type": "write",
+        "path": "/dev/null",
+        "actor_pid": 276,
+        "sequence": 12,
+        "timestamp": "2026-09-03T15:52:43Z",
+        "raw_order": 519
+      },
+      "predicted": {
+        "sequence": 1,
+        "category": "process",
+        "type": "exec",
+        "executable": "/bin/bash",
+        "arguments": [
+          "-c",
+          "\n# Create a normalized version of the C++ file\n# Remove comments and normalize whitespace\n\n# Method 1: Using gcc preprocessor\ngcc -fpreprocessed -dD -E -P /tmp/submission.cpp 2>/dev/null | \\\n  sed 's/^[[:space:]]*//g' | \\\n  sed 's/[[:space:]]*$//g' | \\\n  sed '/^$/d' | \\\n  sed 's/[[:space:]]\\+/ /g' > /tmp/normalized.cpp\n\necho \"=== Normalized code ===\"\ncat /tmp/normalized.cpp\necho \"\"\necho \"=== MD5 sum of normalized code ===\"\nmd5sum /tmp/normalized.cpp | cut -d' ' -f1\n"
+        ],
+        "purpose": "Execute the bash tool command to normalize C++ file and compute MD5"
+      }
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 4,
+      "actual": {
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/sed",
+        "arguments": [
+          "sed",
+          "s/^[[:space:]]*//g"
+        ],
+        "actor_pid": 277,
+        "parent_pid": 256,
+        "sequence": 13,
+        "timestamp": "2026-09-03T15:52:43Z",
+        "raw_order": 525
+      },
+      "predicted": {
+        "sequence": 1,
+        "category": "process",
+        "type": "exec",
+        "executable": "/bin/echo",
+        "arguments": [
+          "=== Normalized code ==="
+        ],
+        "purpose": "Output header for normalized code section"
+      }
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 4,
+      "actual": {
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/x86_64-linux-gnu-gcc-11",
+        "arguments": [
+          "gcc",
+          "-fpreprocessed",
+          "-dD",
+          "-E",
+          "-P",
+          "/tmp/submission.cpp"
+        ],
+        "actor_pid": 276,
+        "parent_pid": 256,
+        "sequence": 15,
+        "timestamp": "2026-09-03T15:52:43Z",
+        "raw_order": 533
+      },
+      "predicted": {
+        "sequence": 2,
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/sed",
+        "arguments": [
+          "/^$/d"
+        ],
+        "purpose": "Third sed in pipeline removes empty lines"
+      }
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 4,
+      "actual": {
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/sed",
+        "arguments": [
+          "sed",
+          "/^$/d"
+        ],
+        "actor_pid": 279,
+        "parent_pid": 256,
+        "sequence": 16,
+        "timestamp": "2026-09-03T15:52:43Z",
+        "raw_order": 547
+      },
+      "predicted": {
+        "sequence": 1,
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/sed",
+        "arguments": [
+          "s/^[[:space:]]*//g"
+        ],
+        "purpose": "First sed in pipeline removes leading whitespace (already executing in parallel)"
+      }
+    },
+    {
+      "task": "direct1",
+      "tool_sequence": 4,
+      "actual": {
+        "category": "file",
+        "type": "write",
+        "path": "/tmp/normalized.cpp",
+        "actor_pid": 280,
+        "sequence": 17,
+        "timestamp": "2026-09-03T15:52:43Z",
+        "raw_order": 558
+      },
+      "predicted": {
+        "sequence": 17,
+        "category": "process",
+        "type": "exec",
+        "executable": "/usr/bin/sed",
+        "arguments": [
+          "s/[[:space:]]\\+/ /g"
+        ],
+        "purpose": "Fourth sed in pipeline normalizes multiple whitespace to single space"
+      }
+    }
+  ]
+}

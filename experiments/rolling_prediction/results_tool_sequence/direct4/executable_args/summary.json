@@ -1,0 +1,14 @@
+{
+  "task": "direct4",
+  "matching_policy": "executable_args",
+  "initial_tool_prediction_queries": 4,
+  "re_prediction_queries": 7,
+  "total_prediction_queries": 11,
+  "actual_operation_count": 10,
+  "pre_event_pass_count": 3,
+  "stop_mismatch_count": 7,
+  "invalidated_prediction_count": 17,
+  "remaining_predicted_only_count": 2,
+  "pre_event_operation_recall": 0.3,
+  "query_reduction_relative_to_operation_events": -0.10000000000000009
+}

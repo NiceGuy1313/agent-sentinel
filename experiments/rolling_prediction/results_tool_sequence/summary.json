@@ -1,0 +1,58 @@
+[
+  {
+    "task": "direct1",
+    "matching_policy": "executable_args",
+    "initial_tool_prediction_queries": 4,
+    "re_prediction_queries": 16,
+    "total_prediction_queries": 20,
+    "actual_operation_count": 22,
+    "pre_event_pass_count": 6,
+    "stop_mismatch_count": 16,
+    "invalidated_prediction_count": 121,
+    "remaining_predicted_only_count": 9,
+    "pre_event_operation_recall": 0.2727272727272727,
+    "query_reduction_relative_to_operation_events": 0.09090909090909094
+  },
+  {
+    "task": "direct2",
+    "matching_policy": "executable_args",
+    "initial_tool_prediction_queries": 2,
+    "re_prediction_queries": 3,
+    "total_prediction_queries": 5,
+    "actual_operation_count": 5,
+    "pre_event_pass_count": 2,
+    "stop_mismatch_count": 3,
+    "invalidated_prediction_count": 2,
+    "remaining_predicted_only_count": 1,
+    "pre_event_operation_recall": 0.4,
+    "query_reduction_relative_to_operation_events": 0.0
+  },
+  {
+    "task": "direct3",
+    "matching_policy": "executable_args",
+    "initial_tool_prediction_queries": 6,
+    "re_prediction_queries": 11,
+    "total_prediction_queries": 17,
+    "actual_operation_count": 13,
+    "pre_event_pass_count": 2,
+    "stop_mismatch_count": 11,
+    "invalidated_prediction_count": 24,
+    "remaining_predicted_only_count": 0,
+    "pre_event_operation_recall": 0.15384615384615385,
+    "query_reduction_relative_to_operation_events": -0.3076923076923077
+  },
+  {
+    "task": "direct4",
+    "matching_policy": "executable_args",
+    "initial_tool_prediction_queries": 4,
+    "re_prediction_queries": 7,
+    "total_prediction_queries": 11,
+    "actual_operation_count": 10,
+    "pre_event_pass_count": 3,
+    "stop_mismatch_count": 7,
+    "invalidated_prediction_count": 17,
+    "remaining_predicted_only_count": 2,
+    "pre_event_operation_recall": 0.3,
+    "query_reduction_relative_to_operation_events": -0.10000000000000009
+  }
+]

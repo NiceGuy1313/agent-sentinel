@@ -75,3 +75,35 @@ def processes_match(
     if policy == POLICY_EXECUTABLE_ONLY:
         return True
     return pred["arguments"] == observed["arguments"]
+
+
+def _normalize_path(value: Any) -> str:
+    return _normalize_argument(os.path.normpath(str(value).strip()))
+
+
+def operations_match(
+    predicted: dict[str, Any] | None, actual: dict[str, Any], policy: str
+) -> bool:
+    """Compare one predicted operation with one AgentSentinel operation."""
+    if predicted is None or predicted.get("category") != actual.get("category") or predicted.get("type") != actual.get("type"):
+        return False
+    category, operation_type = actual["category"], actual["type"]
+    if category == "process" and operation_type == "exec":
+        shaped = dict(predicted)
+        shaped["likely_arguments"] = shaped.get("arguments", shaped.get("likely_arguments", []))
+        return processes_match(shaped, actual, policy)
+    if category == "process" and operation_type == "signal":
+        return str(predicted.get("signal", "")).upper() == str(actual.get("signal", "")).upper()
+    if category == "file":
+        if _normalize_path(predicted.get("path", "")) != _normalize_path(actual.get("path", "")):
+            return False
+        return operation_type != "rename" or _normalize_path(
+            predicted.get("new_path", "")
+        ) == _normalize_path(actual.get("new_path", ""))
+    if category == "network":
+        return (
+            str(predicted.get("remote_host", "")).lower()
+            == str(actual.get("remote_host", "")).lower()
+            and int(predicted.get("remote_port", -1)) == int(actual.get("remote_port", -2))
+        )
+    return False
