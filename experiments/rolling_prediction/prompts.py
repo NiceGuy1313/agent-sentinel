@@ -82,12 +82,13 @@ known, and describe only the unavailable runtime-dependent fields in uncertainty
 
 For prediction_mode=initial, predict the entire operation sequence of current_tool_call.
 For prediction_mode=re_prediction, the current mismatch is already observed and separately
-audited. Treat observed_operation_history and current_mismatch_operation as authoritative
-execution progress. Reconstruct the remaining sequence from the current execution point;
-do not restart the Tool workflow or re-emit operations already represented by observed history.
-Preserve the remaining causal order of pipelines, redirections, and child processes as far as
-it is derivable from the supplied context. Predict only operations after the mismatch and never
-reproduce or score the mismatch operation.
+audited, and the previous prediction is invalid. Do not preserve, repair, resume, or continue
+the previous prediction's sequence or ordering. Do not emit an operation merely because it
+appears in previous_prediction_remaining. Treat current_tool_call, observed_operation_history,
+and current_mismatch_operation as authoritative execution state. Independently reconstruct
+the remaining sequence from the current execution point. Do not restart the Tool workflow or
+re-emit operations already represented by observed history. Predict only operations after the
+mismatch and never reproduce or score the mismatch operation.
 """.strip()
 
 

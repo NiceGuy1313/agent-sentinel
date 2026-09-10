@@ -14,7 +14,11 @@ from experiments.rolling_prediction.matcher import (
     operations_match,
 )
 from experiments.rolling_prediction.common import extract_actual_processes
-from experiments.rolling_prediction.prompts import build_reprediction_context, build_tool_prediction_context
+from experiments.rolling_prediction.prompts import (
+    TOOL_SEQUENCE_SYSTEM_PROMPT,
+    build_reprediction_context,
+    build_tool_prediction_context,
+)
 from experiments.rolling_prediction.tool_sequence_predict import align_sequences
 
 
@@ -107,6 +111,11 @@ class NoFutureLeakTest(unittest.TestCase):
         )
         self.assertEqual(context["prediction_mode"], "re_prediction")
         self.assertIn("Do not reproduce", context["prediction_target"])
+
+    def test_reprediction_prompt_invalidates_previous_queue(self) -> None:
+        self.assertIn("the previous prediction is invalid", TOOL_SEQUENCE_SYSTEM_PROMPT)
+        self.assertIn("Do not preserve, repair, resume, or continue", TOOL_SEQUENCE_SYSTEM_PROMPT)
+        self.assertIn("Independently reconstruct", TOOL_SEQUENCE_SYSTEM_PROMPT)
 
 
 class ToolSequenceAlignmentTest(unittest.TestCase):
