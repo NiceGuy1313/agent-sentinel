@@ -1,0 +1,1 @@
+{"model": "claude-sonnet-4-5-20250929", "api_key": "[REDACTED: supplied via environment]", "messages": [], "n_images": 3, "max_requests": 30, "enable_console_log": true, "output_dir": "agentdojo_sandbox_20260910_retry2/agentdojo_slack.json", "defenses": [{"type": "sandbox"}], "attack": {"type": "agentdojo"}, "mock_servers": ["computer-use-demo-test-attack-server"]}

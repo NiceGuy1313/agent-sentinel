@@ -1,0 +1,2 @@
+{"event": "run_start", "time": "2026-09-10T02:26:12.816783"}
+{"event": "task", "attack": "agentdojo", "task": "agentdojo_clouddrive.json", "start": "2026-09-10T02:26:12.817286", "end": "2026-09-10T02:27:12.410947", "seconds": 59.6, "returncode": 0}
