@@ -1,0 +1,1 @@
+{"model": "claude-sonnet-4-5-20250929", "api_key": "[REDACTED: supplied via environment]", "messages": [], "n_images": 3, "max_requests": 30, "enable_console_log": true, "output_dir": "adaptive_attack_sandbox_20260910/adaptive_attack4.json", "defenses": [{"type": "sandbox"}], "attack": {"type": "adaptive_attack"}}

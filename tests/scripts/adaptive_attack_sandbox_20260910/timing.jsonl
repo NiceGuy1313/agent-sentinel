@@ -1,0 +1,7 @@
+{"event": "run_start", "time": "2026-09-10T05:47:58.632723"}
+{"event": "task", "attack": "adaptive_attack", "task": "adaptive_attack5.json", "start": "2026-09-10T05:47:58.634421", "end": "2026-09-10T05:48:30.411038", "seconds": 31.8, "returncode": 0}
+{"event": "task", "attack": "adaptive_attack", "task": "adaptive_attack2.json", "start": "2026-09-10T05:48:30.411972", "end": "2026-09-10T05:50:29.799509", "seconds": 119.4, "returncode": 0}
+{"event": "task", "attack": "adaptive_attack", "task": "adaptive_attack4.json", "start": "2026-09-10T05:50:29.801121", "end": "2026-09-10T05:52:36.926635", "seconds": 127.1, "returncode": 0}
+{"event": "task", "attack": "adaptive_attack", "task": "adaptive_attack3.json", "start": "2026-09-10T05:52:36.929240", "end": "2026-09-10T05:53:49.896654", "seconds": 73.0, "returncode": 0}
+{"event": "task", "attack": "adaptive_attack", "task": "adaptive_attack1.json", "start": "2026-09-10T05:53:49.897626", "end": "2026-09-10T05:55:50.712908", "seconds": 120.8, "returncode": 0}
+{"event": "run_end", "time": "2026-09-10T05:55:50.714691", "total_seconds": 472.1}

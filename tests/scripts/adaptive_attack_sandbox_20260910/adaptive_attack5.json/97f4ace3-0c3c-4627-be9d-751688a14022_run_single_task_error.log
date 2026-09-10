@@ -1,0 +1,12 @@
+[Errno 2] No such file or directory: './test_files/user_info'Traceback (most recent call last):
+  File "run_single_task.py", line 396, in run
+    setup_running_env(container, task_config["config"], basic_config["mock_servers"])
+  File "run_single_task.py", line 192, in setup_running_env
+    copy_from_host_to_container(con, file["src"], file["dest"])
+  File "run_single_task.py", line 32, in copy_from_host_to_container
+    tar.add(name=host_path, arcname=os.path.basename(con_path))
+  File "/usr/lib/python3.8/tarfile.py", line 1985, in add
+    tarinfo = self.gettarinfo(name, arcname)
+  File "/usr/lib/python3.8/tarfile.py", line 1864, in gettarinfo
+    statres = os.lstat(name)
+FileNotFoundError: [Errno 2] No such file or directory: './test_files/user_info'

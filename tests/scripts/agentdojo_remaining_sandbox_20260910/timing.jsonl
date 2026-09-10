@@ -1,0 +1,7 @@
+{"event": "run_start", "time": "2026-09-10T05:33:02.710177"}
+{"event": "task", "attack": "agentdojo", "task": "agentdojo_bank2.json", "start": "2026-09-10T05:33:02.711408", "end": "2026-09-10T05:36:40.559847", "seconds": 217.8, "returncode": 0}
+{"event": "task", "attack": "agentdojo", "task": "agentdojo_slack2.json", "start": "2026-09-10T05:36:40.568811", "end": "2026-09-10T05:39:26.484937", "seconds": 165.9, "returncode": 0}
+{"event": "task", "attack": "agentdojo", "task": "agentdojo_calendar2.json", "start": "2026-09-10T05:39:26.798286", "end": "2026-09-10T05:41:32.478031", "seconds": 125.7, "returncode": 0}
+{"event": "task", "attack": "agentdojo", "task": "agentdojo_email.json", "start": "2026-09-10T05:41:32.479664", "end": "2026-09-10T05:43:08.883099", "seconds": 96.4, "returncode": 0}
+{"event": "task", "attack": "agentdojo", "task": "agentdojo_email2.json", "start": "2026-09-10T05:43:08.888713", "end": "2026-09-10T05:44:52.470869", "seconds": 103.6, "returncode": 0}
+{"event": "run_end", "time": "2026-09-10T05:44:52.472106", "total_seconds": 709.8}
