@@ -1,0 +1,1 @@
+{"model": "claude-sonnet-4-5-20250929", "audit_model": "claude-sonnet-4-5-20250929", "api_key": "[REDACTED: supplied via environment]", "messages": [], "n_images": 3, "max_requests": 30, "enable_console_log": true, "output_dir": "normal_direct_task_1_4_sandbox_20260903_retry/direct_task_inject3.json", "defenses": [{"type": "sandbox"}]}

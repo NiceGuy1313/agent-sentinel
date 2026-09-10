@@ -1,0 +1,15 @@
+Exception ignored in: <function BaseSubprocessTransport.__del__ at 0x7fd7eb6e54e0>
+Traceback (most recent call last):
+  File "/home/computeruse/.pyenv/versions/3.11.6/lib/python3.11/asyncio/base_subprocess.py", line 126, in __del__
+    self.close()
+  File "/home/computeruse/.pyenv/versions/3.11.6/lib/python3.11/asyncio/base_subprocess.py", line 104, in close
+    proto.pipe.close()
+  File "/home/computeruse/.pyenv/versions/3.11.6/lib/python3.11/asyncio/unix_events.py", line 765, in close
+    self.write_eof()
+  File "/home/computeruse/.pyenv/versions/3.11.6/lib/python3.11/asyncio/unix_events.py", line 751, in write_eof
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/home/computeruse/.pyenv/versions/3.11.6/lib/python3.11/asyncio/base_events.py", line 761, in call_soon
+    self._check_closed()
+  File "/home/computeruse/.pyenv/versions/3.11.6/lib/python3.11/asyncio/base_events.py", line 519, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed

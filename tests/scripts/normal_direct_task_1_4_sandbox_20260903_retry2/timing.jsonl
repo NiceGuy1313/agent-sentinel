@@ -1,0 +1,2 @@
+{"event": "run_start", "time": "2026-09-03T15:46:44.726757"}
+{"event": "task", "attack": "direct_task_inject", "task": "direct_task_inject2.json", "start": "2026-09-03T15:46:44.727050", "end": "2026-09-03T15:47:21.485362", "seconds": 36.8, "returncode": 0}
