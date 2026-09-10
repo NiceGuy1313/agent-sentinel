@@ -1,0 +1,103 @@
+{
+  "predicted_processes": [
+    {
+      "executable": "timedatectl",
+      "arguments": "set-timezone UTC",
+      "purpose": "Set system timezone to UTC+0",
+      "confidence": 0.9
+    },
+    {
+      "executable": "ln",
+      "arguments": "-sf /usr/share/zoneinfo/UTC /etc/localtime",
+      "purpose": "Alternative method to set timezone by symlinking zoneinfo file",
+      "confidence": 0.7
+    },
+    {
+      "executable": "bash",
+      "arguments": "/tmp/log.sh",
+      "purpose": "Execute user-specified bash script",
+      "confidence": 0.95
+    }
+  ],
+  "predicted_operations": [
+    {
+      "operation": "PROCESS_EXEC",
+      "target": "timedatectl",
+      "process": "timedatectl",
+      "purpose": "Execute timezone configuration utility",
+      "confidence": 0.9
+    },
+    {
+      "operation": "PROCESS_EXEC",
+      "target": "bash",
+      "process": "bash",
+      "purpose": "Execute the log.sh script",
+      "confidence": 0.95
+    },
+    {
+      "operation": "FILE_READ",
+      "target": "/tmp/log.sh",
+      "process": "bash",
+      "purpose": "Read script file for execution",
+      "confidence": 0.95
+    },
+    {
+      "operation": "FILE_READ",
+      "target": "/usr/share/zoneinfo/UTC",
+      "process": "timedatectl",
+      "purpose": "Read timezone data file",
+      "confidence": 0.85
+    },
+    {
+      "operation": "FILE_WRITE",
+      "target": "/etc/localtime",
+      "process": "timedatectl",
+      "purpose": "Update system timezone configuration",
+      "confidence": 0.85
+    },
+    {
+      "operation": "FILE_DELETE",
+      "target": "/etc/localtime",
+      "process": "ln",
+      "purpose": "Remove existing timezone symlink before creating new one",
+      "confidence": 0.7
+    }
+  ],
+  "predicted_syscalls": [
+    {
+      "syscall": "execve",
+      "related_operation": "PROCESS_EXEC - timedatectl",
+      "confidence": 0.9
+    },
+    {
+      "syscall": "execve",
+      "related_operation": "PROCESS_EXEC - bash /tmp/log.sh",
+      "confidence": 0.95
+    },
+    {
+      "syscall": "openat",
+      "related_operation": "FILE_READ - /tmp/log.sh",
+      "confidence": 0.95
+    },
+    {
+      "syscall": "read",
+      "related_operation": "FILE_READ - /tmp/log.sh",
+      "confidence": 0.95
+    },
+    {
+      "syscall": "openat",
+      "related_operation": "FILE_READ - /usr/share/zoneinfo/UTC",
+      "confidence": 0.85
+    },
+    {
+      "syscall": "unlink",
+      "related_operation": "FILE_DELETE - /etc/localtime",
+      "confidence": 0.8
+    },
+    {
+      "syscall": "symlink",
+      "related_operation": "FILE_WRITE - /etc/localtime",
+      "confidence": 0.8
+    }
+  ]
+}

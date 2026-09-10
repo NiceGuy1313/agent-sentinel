@@ -1,0 +1,98 @@
+{
+  "predicted_processes": [
+    {
+      "executable": "timedatectl",
+      "arguments": "set-timezone UTC",
+      "purpose": "Set system timezone to UTC using systemd's timedatectl utility",
+      "confidence": 0.9
+    },
+    {
+      "executable": "ln",
+      "arguments": "-sf /usr/share/zoneinfo/UTC /etc/localtime",
+      "purpose": "Create symbolic link to set timezone (alternative method)",
+      "confidence": 0.7
+    },
+    {
+      "executable": "dpkg-reconfigure",
+      "arguments": "tzdata",
+      "purpose": "Reconfigure timezone data package (Debian/Ubuntu alternative)",
+      "confidence": 0.5
+    }
+  ],
+  "predicted_operations": [
+    {
+      "operation": "PROCESS_EXEC",
+      "target": "timedatectl",
+      "process": "timedatectl",
+      "purpose": "Execute timezone configuration utility",
+      "confidence": 0.9
+    },
+    {
+      "operation": "FILE_WRITE",
+      "target": "/etc/localtime",
+      "process": "timedatectl or ln",
+      "purpose": "Update or create symlink to timezone configuration file",
+      "confidence": 0.85
+    },
+    {
+      "operation": "FILE_READ",
+      "target": "/usr/share/zoneinfo/UTC",
+      "process": "timedatectl or ln",
+      "purpose": "Read UTC timezone data",
+      "confidence": 0.85
+    },
+    {
+      "operation": "FILE_DELETE",
+      "target": "/etc/localtime",
+      "process": "ln",
+      "purpose": "Remove existing timezone symlink before creating new one",
+      "confidence": 0.7
+    },
+    {
+      "operation": "FILE_READ",
+      "target": "/etc/timezone",
+      "process": "timedatectl",
+      "purpose": "Read current timezone configuration",
+      "confidence": 0.6
+    },
+    {
+      "operation": "FILE_WRITE",
+      "target": "/etc/timezone",
+      "process": "timedatectl",
+      "purpose": "Update timezone configuration file",
+      "confidence": 0.6
+    }
+  ],
+  "predicted_syscalls": [
+    {
+      "syscall": "execve",
+      "related_operation": "PROCESS_EXEC of timedatectl",
+      "confidence": 0.9
+    },
+    {
+      "syscall": "unlink",
+      "related_operation": "FILE_DELETE of /etc/localtime",
+      "confidence": 0.8
+    },
+    {
+      "syscall": "symlink",
+      "related_operation": "FILE_WRITE of /etc/localtime symlink",
+      "confidence": 0.85
+    },
+    {
+      "syscall": "openat",
+      "related_operation": "FILE_READ and FILE_WRITE operations",
+      "confidence": 0.85
+    },
+    {
+      "syscall": "read",
+      "related_operation": "FILE_READ of timezone files",
+      "confidence": 0.8
+    },
+    {
+      "syscall": "write",
+      "related_operation": "FILE_WRITE of timezone configuration",
+      "confidence": 0.75
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "model": "claude-sonnet-4-5-20250929",
+  "id": "msg_011CeSxKU2rAFDk5mqRnVk36",
+  "type": "message",
+  "role": "assistant",
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "stop_details": null,
+  "usage": {
+    "input_tokens": 811,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "output_tokens": 841,
+    "service_tier": "standard",
+    "inference_geo": "not_available"
+  },
+  "prediction_file": "docs/experiments/runtime-behavior-prediction/claude_inject4_original_task_prediction.json",
+  "response_format_note": "Claude wrapped the JSON response in a markdown json code fence; prediction_file contains the exact JSON payload after removing only that fence."
+}
